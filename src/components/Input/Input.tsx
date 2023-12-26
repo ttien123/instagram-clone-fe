@@ -1,4 +1,4 @@
-import { InputHTMLAttributes } from 'react';
+import { InputHTMLAttributes, useRef, useState } from 'react';
 import type { UseFormRegister, RegisterOptions } from 'react-hook-form';
 
 interface Props extends InputHTMLAttributes<HTMLInputElement> {
@@ -8,7 +8,6 @@ interface Props extends InputHTMLAttributes<HTMLInputElement> {
     classNameLabel?: string;
     register?: UseFormRegister<any>;
     rules?: RegisterOptions;
-    labelName?: string;
 }
 
 const Input = ({
@@ -16,22 +15,20 @@ const Input = ({
     className,
     errorsMessage,
     name,
+    type = 'text',
     rules,
     autoComplete,
-    labelName,
-    classNameInput = 'p-2 w-full outline-none border border-gray-300 focus:border-gray-500 rounded-sm focus:shadow-sm',
+    classNameInput = 'p-[10px] w-full block h-full outline-none rounded-sm text-[12px] bg-secondary-background',
     classNameError = 'mt-1 mb-1 text-red-600 min-h-[2px] text-[12px]',
-    classNameLabel = 'mb-1 font-semibold inline-block cursor-pointer',
     ...rest
 }: Props) => {
     const registerResult = register && name ? register(name, rules) : null;
 
     return (
         <div className={className}>
-            <label htmlFor={labelName} className={classNameLabel}>
-                {labelName}
-            </label>
-            <input id={labelName} className={classNameInput} {...registerResult} {...rest} />
+            <div className="flex border border-stroke bg-secondary-background focus-within:">
+                <input type={type} className={classNameInput} {...registerResult} {...rest} />
+            </div>
             <div className={classNameError}>{errorsMessage}</div>
         </div>
     );

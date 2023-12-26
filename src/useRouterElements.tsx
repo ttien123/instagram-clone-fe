@@ -5,6 +5,7 @@ import path from './constants/path';
 import AuthLayout from './layouts/AuthLayout';
 import SignIn from './pages/SignIn';
 import SignUp from './pages/SignUp';
+import Logined from './pages/Logined';
 
 function ProtectedRoute() {
     const isAuthenticated = false;
@@ -44,6 +45,14 @@ const useRouterElements = () => {
                     element: (
                         <AuthLayout>
                             <SignUp />
+                        </AuthLayout>
+                    ),
+                },
+                {
+                    path: path.logined,
+                    element: (
+                        <AuthLayout>
+                            <Logined />
                         </AuthLayout>
                     ),
                 },
