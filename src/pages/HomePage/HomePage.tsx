@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
+import NavHome from './components/NavHome';
 
 const HomePage = () => {
-    return <div>HomePage</div>;
+    return <div className="">Homepage</div>;
 };
 
 export default HomePage;

@@ -6,6 +6,8 @@ import AuthLayout from './layouts/AuthLayout';
 import SignIn from './pages/SignIn';
 import SignUp from './pages/SignUp';
 import Logined from './pages/Logined';
+import Profile from './pages/Profile';
+import Messages from './pages/Messages';
 
 function ProtectedRoute() {
     const isAuthenticated = false;
@@ -25,6 +27,22 @@ const useRouterElements = () => {
             element: (
                 <HomeLayout>
                     <HomePage />
+                </HomeLayout>
+            ),
+        },
+        {
+            path: path.messages,
+            element: (
+                <HomeLayout>
+                    <Messages />
+                </HomeLayout>
+            ),
+        },
+        {
+            path: path.profile,
+            element: (
+                <HomeLayout>
+                    <Profile />
                 </HomeLayout>
             ),
         },
