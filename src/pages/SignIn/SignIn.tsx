@@ -1,6 +1,7 @@
 import { yupResolver } from '@hookform/resolvers/yup';
 import React from 'react';
 import { useForm } from 'react-hook-form';
+import { useParams } from 'react-router-dom';
 import IconFbAuth from 'src/assets/IconFbAuth';
 import Button from 'src/components/Button';
 import Input from 'src/components/Input';
