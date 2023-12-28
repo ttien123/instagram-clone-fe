@@ -12,17 +12,13 @@ import IconCreate from 'src/assets/IconCreate';
 import IconThreads from 'src/assets/IconThreads';
 import avatar from 'src/assets/AuthImg/technology-computer-creative-design.jpg';
 import { Link } from 'react-router-dom';
+import ContentSearch from '../ContentSearch';
+import ContentNotification from '../ContentNotification';
 
 interface Props {
     isShowAll: boolean;
     setIsShowAll: React.Dispatch<React.SetStateAction<boolean>>;
 }
-const ContentSearch = () => {
-    return <div>search</div>;
-};
-const ContentNotification = () => {
-    return <div>ContentNotification</div>;
-};
 
 const NavHome = ({ setIsShowAll, isShowAll }: Props) => {
     return (
@@ -70,7 +66,7 @@ const NavHome = ({ setIsShowAll, isShowAll }: Props) => {
                             name="Search"
                             isShowAll={isShowAll}
                             setIsShowAll={setIsShowAll}
-                            ContentValue={ContentSearch}
+                            ContentValue={<ContentSearch />}
                         />
                     </div>
                     <ItemLink
@@ -88,7 +84,7 @@ const NavHome = ({ setIsShowAll, isShowAll }: Props) => {
                             name="Notifications"
                             isShowAll={isShowAll}
                             setIsShowAll={setIsShowAll}
-                            ContentValue={ContentNotification}
+                            ContentValue={<ContentNotification />}
                         />
                     </div>
                     <ItemLink
@@ -121,7 +117,7 @@ const NavHome = ({ setIsShowAll, isShowAll }: Props) => {
                             name="More"
                             isShowAll={isShowAll}
                             setIsShowAll={setIsShowAll}
-                            ContentValue={ContentNotification}
+                            ContentValue={<ContentNotification />}
                         />
                     </div>
                 </div>

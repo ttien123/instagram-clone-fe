@@ -9,7 +9,7 @@ interface Props {
     Icon: () => JSX.Element;
     IconActive: () => JSX.Element;
     isShowAll?: boolean;
-    ContentValue: () => JSX.Element;
+    ContentValue: React.ReactNode;
     setIsShowAll: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
@@ -21,13 +21,14 @@ const ItemNavPopover = ({ Icon, IconActive, name, isShowAll, setIsShowAll, Conte
     return (
         <div className="w-full">
             <Popover
-                classNamePosition="!fixed !top-0 !left-[72px] bg-white rounded-r-[16px]"
+                isToggle={true}
+                classNamePosition="!fixed !top-0 !left-[72px] bg-white rounded-r-[16px] !outline-none"
                 open={open}
                 setOpen={setOpen}
                 renderPopover={
-                    <div className="">
-                        <div className="w-[397px] h-[100vh] overflow-y-auto py-2 shadow-popoverShadow rounded-r-[16px]">
-                            <ContentValue />
+                    <div>
+                        <div className="w-[397px] h-[100vh] py-2 shadow-popoverShadow rounded-r-[16px]">
+                            {ContentValue}
                         </div>
                     </div>
                 }

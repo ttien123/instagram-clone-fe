@@ -12,7 +12,7 @@ import {
     useInteractions,
     useClick,
 } from '@floating-ui/react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence, Variants } from 'framer-motion';
 
 interface Props {
     children: React.ReactNode;
@@ -21,6 +21,7 @@ interface Props {
     classNamePosition?: string;
     as?: ElementType;
     placement?: Placement;
+    isToggle?: boolean;
     open: boolean;
     setOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
@@ -34,6 +35,7 @@ export default function Popover({
     placement = 'bottom',
     setOpen,
     open,
+    isToggle,
 }: Props) {
     // const [open, setOpen] = useState(initialOpen || false);
 
@@ -46,11 +48,20 @@ export default function Popover({
         placement,
     });
     const { refs, floatingStyles, context } = data;
-    const click = useClick(context);
+    const click = useClick(context, {
+        toggle: isToggle,
+    });
     const dismiss = useDismiss(context);
     const role = useRole(context);
     const { getReferenceProps, getFloatingProps } = useInteractions([click, role, dismiss]);
     const id = useId();
+
+    const animationNav: Variants = {
+        open: {
+            x: '0%',
+        },
+        closed: { x: '-100%' },
+    };
 
     return (
         <Element className={className}>
@@ -61,19 +72,14 @@ export default function Popover({
                 <AnimatePresence>
                     {open && (
                         <motion.div
-                            ref={refs.setFloating}
-                            initial={{
-                                x: '-100%',
-                            }}
-                            animate={{
-                                x: '0%',
-                            }}
-                            exit={{
-                                x: '-100%',
-                            }}
+                            initial={'closed'}
+                            animate={'open'}
+                            exit={'closed'}
+                            variants={isToggle ? animationNav : {}}
                             transition={{
                                 duration: 0.5,
                             }}
+                            ref={refs.setFloating}
                             style={{
                                 ...floatingStyles,
                             }}
