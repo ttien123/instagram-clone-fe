@@ -6,7 +6,11 @@ import Popover from '../Popover';
 import SearchRecent from '../SearchRecent';
 import MemberSearch from '../MemberSearch';
 
-const InputSearch = () => {
+interface Props {
+    isMobile?: boolean;
+}
+
+const InputSearch = ({ isMobile }: Props) => {
     const inputRef = useRef<HTMLInputElement>(null);
     const [open, setOpen] = useState(false);
     const [isFocusInput, setIsFocusInput] = useState(false);
@@ -26,8 +30,15 @@ const InputSearch = () => {
 
     useEffect(() => {}, [debouncedValue]);
     return (
-        <Popover open={open} isToggle={false} setOpen={setOpen} renderPopover={<MemberSearch />}>
-            <div className="mx-4 mb-6 rounded-lg bg-highlight-background relative">
+        <div className={`${isMobile ? 'mx-0' : 'mx-4 mb-6'} rounded-lg bg-highlight-background relative`}>
+            <Popover
+                open={open}
+                isToggle={false}
+                setOpen={setOpen}
+                renderPopover={
+                    true ? <MemberSearch isMobile={isMobile} /> : isMobile && <SearchRecent isMobile={isMobile} />
+                }
+            >
                 <input
                     onFocus={() => setIsFocusInput(true)}
                     onBlur={() => !valueSearch && setIsFocusInput(false)}
@@ -37,25 +48,25 @@ const InputSearch = () => {
                     type="text"
                     className="block w-full py-[3px] px-4 bg-highlight-background h-[40px] rounded-lg border-none outline-none"
                 />
-                <div className="absolute top-[50%] translate-y-[-50%] left-4 flex items-center justify-start">
-                    {!isFocusInput && (
-                        <div className="mr-3">
-                            <IconSearchInput />
-                        </div>
-                    )}
-                    {!valueSearch && <div className=" text-secondary-icon">Search</div>}
-                </div>
-                {isFocusInput && (
-                    <button
-                        onClick={handleClearInput}
-                        className="absolute top-[50%] translate-y-[-50%] right-4 w-[20px] h-[20px] bg-[url(src/assets/AuthImg/TJztmXpWTmS.png)] bg-no-repeat bg-[-318px_-333px]"
-                    ></button>
+            </Popover>
+            <div className="absolute top-[50%] translate-y-[-50%] left-4 flex items-center justify-start">
+                {!isFocusInput && (
+                    <div className="mr-3">
+                        <IconSearchInput />
+                    </div>
                 )}
-                {/* <div className="absolute top-[30%] translate-y-[-50%] right-4 w-[18px] h-[18px] animate-loading-icon">
+                {!valueSearch && <div className=" text-secondary-icon">Search</div>}
+            </div>
+            {isFocusInput && (
+                <button
+                    onClick={handleClearInput}
+                    className="absolute top-[50%] translate-y-[-50%] right-4 w-[20px] h-[20px] bg-[url(src/assets/AuthImg/TJztmXpWTmS.png)] bg-no-repeat bg-[-318px_-333px]"
+                ></button>
+            )}
+            {/* <div className="absolute top-[30%] translate-y-[-50%] right-4 w-[18px] h-[18px] animate-loading-icon">
                     <IconLoading />
                 </div> */}
-            </div>
-        </Popover>
+        </div>
     );
 };
 

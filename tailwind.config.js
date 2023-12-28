@@ -26,6 +26,7 @@ export default {
             },
             boxShadow: {
                 popoverShadow: '4px 0 24px rgba(0, 0, 0,.15)',
+                'always-black': '0 4px 12px rgba(0, 0, 0,.15)',
             },
             keyframes: {
                 loading: {

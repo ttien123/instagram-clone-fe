@@ -2,12 +2,18 @@ import React, { useEffect, useRef } from 'react';
 import Button from '../Button';
 import LinkToMember from '../LinkToMember';
 import SkeletonSearch from '../SkeletonSearch/SkeletonSearch';
-
-const SearchRecent = () => {
+interface Props {
+    isMobile?: boolean;
+}
+const SearchRecent = ({ isMobile }: Props) => {
     const ref = useRef<HTMLInputElement>(null);
 
     return (
-        <div className="w-[397px] max-w-[100%] h-full max-h-full pt-3 mt-3 border-t border-t-separator">
+        <div
+            className={`${
+                isMobile ? 'w-[375px] shadow-always-black mr-4' : 'w-[397px] mt-3'
+            }  max-w-[100%] h-full max-h-full pt-3 border-t border-t-separator`}
+        >
             <div className="flex items-center justify-between mx-6 my-[6px]">
                 <div className="font-semibold">Recent</div>
                 <Button isOnlyText extendsClassName="font-semibold">
