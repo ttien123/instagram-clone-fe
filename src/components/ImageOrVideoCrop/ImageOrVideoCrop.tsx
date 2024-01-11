@@ -29,9 +29,7 @@ const ImageOrVideoCrop = ({
     const [crop, setCrop] = useState(cropInit);
     const [zoom, setZoom] = useState(zoomInit);
     const onCropComplete = (_: any, croppedAreaPixels: CroppedArea) => {
-        // isShowDescription && setCrop(cropInit);
-
-        setCroppedArea(croppedAreaPixels);
+        !isShowDescription && setCroppedArea(croppedAreaPixels);
     };
 
     const handleSetZoom = (zoom: number) => {
@@ -39,24 +37,26 @@ const ImageOrVideoCrop = ({
     };
     const handleCrop = (location: Point) => {
         // if (aspectInit !== 16 / 9 && !isShowDescription) {
-        if (!isShowDescription) {
+        if (!isShowDescription && type.includes('image')) {
             setCrop(location);
         }
-        // } else {
-        // setCrop({ x: 0, y: 0 });
-        // setZoom(1);
-        // }
-        // setImageOrVideoUrl((prev) => {
-        //     const lastArray = prev;
-        //     const newArray = lastArray.map((item) => {
-        //         if (item.url === url) {
-        //             return { ...item, cropInit: location };
-        //         }
-        //         return item;
-        //     });
+        if (!isShowDescription && !type.includes('image')) {
+            setCrop(cropInit);
+        }
+        if (aspectInit === 16 / 9 && !type.includes('image')) {
+            setCrop({ x: 0, y: 0 });
+        }
+        setImageOrVideoUrl((prev) => {
+            const lastArray = prev;
+            const newArray = lastArray.map((item) => {
+                if (item.url === url) {
+                    return { ...item, cropInit: location };
+                }
+                return item;
+            });
 
-        //     return newArray;
-        // });
+            return newArray;
+        });
     };
 
     useEffect(() => {

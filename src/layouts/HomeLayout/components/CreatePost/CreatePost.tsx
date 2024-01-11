@@ -37,6 +37,7 @@ const CreatePost = () => {
     const [isConvertCropped, setIsConvertCropped] = useState(false);
     const [isShowDescription, setIsShowDescription] = useState(false);
     // console.log(listFilePost, listUrlCropped);
+    console.log(listUrlCropped);
 
     const handleCrop = async () => {
         setIsConvertCropped(true);
