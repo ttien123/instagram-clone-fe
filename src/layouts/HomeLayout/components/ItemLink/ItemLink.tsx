@@ -15,12 +15,22 @@ interface Props {
 const ItemLink = ({ Icon, IconActive, name, to, isShowAll, setIsShowAll, src }: Props) => {
     const match = useMatch(`${to}`);
     const handleClick = () => {
-        setIsShowAll(true);
+        if (name === 'Create') {
+            return;
+        } else {
+            if (name !== 'Messages') {
+                setIsShowAll(true);
+            } else {
+                setIsShowAll(false);
+            }
+        }
     };
     return (
-        <Button to={to} className="w-full cursor-pointer" onClick={handleClick}>
+        <Button to={to} className="w-full cursor-pointer " onClick={handleClick}>
             <div className="flex items-center justify-center xl:justify-start py-3 px-[10px] my-1 w-full xl:hover:bg-hover-overlay transition-all duration-300 rounded-lg">
-                {!src && IconActive && Icon && <div>{match && isShowAll ? <IconActive /> : <Icon />}</div>}
+                {!src && IconActive && Icon && (
+                    <div>{match && (name !== 'Messages' ? isShowAll : true) ? <IconActive /> : <Icon />}</div>
+                )}
                 {src && (
                     <div
                         className={`rounded-[50%] w-[28px] h-[28px] overflow-hidden border-[2px] flex-shrink-0 ${

@@ -14,6 +14,9 @@ import avatar from 'src/assets/AuthImg/technology-computer-creative-design.jpg';
 import { Link } from 'react-router-dom';
 import ContentSearch from '../ContentSearch';
 import ContentNotification from '../ContentNotification';
+import Dialog from 'src/components/Dialog';
+import CreatePost from '../CreatePost';
+import { useState } from 'react';
 
 interface Props {
     isShowAll: boolean;
@@ -21,11 +24,13 @@ interface Props {
 }
 
 const NavHome = ({ setIsShowAll, isShowAll }: Props) => {
+    const [isOpenCreatePost, setIsOpenCreatePost] = useState(false);
+
     return (
         <div
             className={`${
                 isShowAll ? 'xl:w-[244px]' : 'w-[72px]'
-            } transition-all duration-500 pt-2 px-3 pb-5 md:h-[100vh] bg-white border-r-separator border-r fixed w-full md:w-[72px] bottom-0 md:left-0 z-10 flex flex-col`}
+            } transition-all duration-500 md:pt-2 px-3 md:pb-5 md:h-[100vh] bg-white border-r-separator border-r fixed w-full md:w-[72px] bottom-0 md:left-0 z-10 flex flex-col`}
         >
             <div className="h-[92px] hidden md:flex items-center justify-center">
                 <Link
@@ -87,16 +92,24 @@ const NavHome = ({ setIsShowAll, isShowAll }: Props) => {
                             ContentValue={<ContentNotification />}
                         />
                     </div>
-                    <ItemLink
-                        Icon={IconCreate}
-                        IconActive={IconCreate}
-                        name="Create"
-                        isShowAll={isShowAll}
-                        setIsShowAll={setIsShowAll}
-                    />
+                    <Dialog
+                        isOpen={isOpenCreatePost}
+                        setIsOpen={setIsOpenCreatePost}
+                        isBtnClose
+                        renderPopover={<CreatePost />}
+                        classNameChildren="w-full"
+                    >
+                        <ItemLink
+                            Icon={IconCreate}
+                            IconActive={IconCreate}
+                            name="Create"
+                            isShowAll={isShowAll}
+                            setIsShowAll={setIsShowAll}
+                        />
+                    </Dialog>
                     <ItemLink
                         src={avatar}
-                        name="Home"
+                        name="Profile"
                         to={path.profile}
                         isShowAll={isShowAll}
                         setIsShowAll={setIsShowAll}

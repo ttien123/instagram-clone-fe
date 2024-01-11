@@ -11,7 +11,7 @@ const SearchRecent = ({ isMobile }: Props) => {
     return (
         <div
             className={`${
-                isMobile ? 'w-[375px] shadow-always-black mr-4' : 'w-[397px] mt-3'
+                isMobile ? 'w-[100vw] bg-white shadow-always-black' : 'w-[397px] mt-3'
             }  max-w-[100%] h-full max-h-full pt-3 border-t border-t-separator`}
         >
             <div className="flex items-center justify-between mx-6 my-[6px]">

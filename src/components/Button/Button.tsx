@@ -6,6 +6,7 @@ interface Prop extends ButtonHTMLAttributes<HTMLButtonElement> {
     children: React.ReactNode;
     isOnlyText?: boolean;
     isbgButton?: boolean;
+    isBtnType2?: boolean;
     extendsClassName?: string;
     className?: string;
     to?: string;
@@ -16,6 +17,7 @@ const Button = ({
     children,
     isOnlyText,
     isbgButton,
+    isBtnType2,
     extendsClassName,
     to,
     href,
@@ -39,6 +41,11 @@ const Button = ({
             newClassName =
                 'text-[14px] px-4 py-[7px] text-white bg-primary-button hover:bg-primary-button-hover rounded-[8px]';
         }
+    }
+
+    if (isBtnType2) {
+        newClassName =
+            'text-[14px] h-[32px] flex items-center justify-center px-4 text-black font-semibold bg-highlight-background hover:bg-secondary-button-hover rounded-[8px]';
     }
 
     if (extendsClassName) {

@@ -2,7 +2,7 @@ import React from 'react';
 
 const IconLoading = () => {
     return (
-        <svg aria-label="Loading..." className="xemfg65 xa4qsjk xs51kk x2a5n4e" role="img" viewBox="0 0 100 100">
+        <svg aria-label="Loading..." role="img" viewBox="0 0 100 100">
             <rect
                 className="x1i210e2"
                 height={10}

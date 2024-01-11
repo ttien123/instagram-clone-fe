@@ -1,18 +1,20 @@
-const IconClose = () => {
+import React from 'react';
+
+const IconClosePost = () => {
     return (
-        <svg aria-label="Close" fill="rgb(115,115,115)" height={16} role="img" viewBox="0 0 24 24" width={16}>
+        <svg aria-label="Close" fill="white" height={18} role="img" viewBox="0 0 24 24" width={18}>
             <title>Close</title>
             <polyline
-                fill="none"
+                fill="white"
                 points="20.643 3.357 12 12 3.353 20.647"
-                stroke="rgb(115,115,115)"
+                stroke="white"
                 strokeLinecap="round"
                 strokeLinejoin="round"
                 strokeWidth={3}
             />
             <line
-                fill="none"
-                stroke="rgb(115,115,115)"
+                fill="white"
+                stroke="white"
                 strokeLinecap="round"
                 strokeLinejoin="round"
                 strokeWidth={3}
@@ -25,4 +27,4 @@ const IconClose = () => {
     );
 };
 
-export default IconClose;
+export default IconClosePost;

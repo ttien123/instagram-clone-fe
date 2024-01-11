@@ -36,7 +36,11 @@ const InputSearch = ({ isMobile }: Props) => {
                 isToggle={false}
                 setOpen={setOpen}
                 renderPopover={
-                    true ? <MemberSearch isMobile={isMobile} /> : isMobile && <SearchRecent isMobile={isMobile} />
+                    valueSearch && isFocusInput ? (
+                        <MemberSearch isMobile={isMobile} />
+                    ) : (
+                        isMobile && <SearchRecent isMobile={isMobile} />
+                    )
                 }
             >
                 <input
@@ -49,7 +53,7 @@ const InputSearch = ({ isMobile }: Props) => {
                     className="block w-full py-[3px] px-4 bg-highlight-background h-[40px] rounded-lg border-none outline-none"
                 />
             </Popover>
-            <div className="absolute top-[50%] translate-y-[-50%] left-4 flex items-center justify-start">
+            <div className="cursor-text absolute top-[50%] translate-y-[-50%] left-4 flex items-center justify-start pointer-events-none">
                 {!isFocusInput && (
                     <div className="mr-3">
                         <IconSearchInput />
@@ -60,12 +64,12 @@ const InputSearch = ({ isMobile }: Props) => {
             {isFocusInput && (
                 <button
                     onClick={handleClearInput}
-                    className="absolute top-[50%] translate-y-[-50%] right-4 w-[20px] h-[20px] bg-[url(src/assets/AuthImg/TJztmXpWTmS.png)] bg-no-repeat bg-[-318px_-333px]"
+                    className="absolute top-[50%] translate-y-[-50%] right-3 w-[20px] h-[20px] bg-[url(src/assets/AuthImg/TJztmXpWTmS.png)] bg-no-repeat bg-[-318px_-333px]"
                 ></button>
             )}
-            {/* <div className="absolute top-[30%] translate-y-[-50%] right-4 w-[18px] h-[18px] animate-loading-icon">
-                    <IconLoading />
-                </div> */}
+            <div className="absolute top-[30%] translate-y-[-50%] right-4 w-[18px] h-[18px] animate-loading-icon">
+                <IconLoading />
+            </div>
         </div>
     );
 };
