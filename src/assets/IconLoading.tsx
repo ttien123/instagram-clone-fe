@@ -1,5 +1,3 @@
-import React from 'react';
-
 const IconLoading = () => {
     return (
         <svg aria-label="Loading..." role="img" viewBox="0 0 100 100">

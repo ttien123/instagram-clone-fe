@@ -4,10 +4,15 @@ import InputFile from 'src/components/InputFile';
 import SwiperPost from 'src/components/SwiperPost/SwiperPost';
 import Button from 'src/components/Button';
 import IconBack from 'src/assets/IconBack';
-import IconZoom from 'src/assets/IconZoom';
 import getCroppedImg, { blobToFile } from 'src/utils/crop/CropImage';
 import Dialog from 'src/components/Dialog';
 import IconLoading from 'src/assets/IconLoading';
+import avatar from 'src/assets/AuthImg/technology-computer-creative-design.jpg';
+import Input from 'src/components/Input';
+import EmojiPicker, { EmojiClickData } from 'emoji-picker-react';
+import EmojiIcons from 'src/components/EmojiIcons';
+import Comment from 'src/components/Comment';
+import ArrowIcon from 'src/assets/ArrowLeft';
 
 export interface initImageOrVideoUrl {
     url: string;
@@ -28,6 +33,8 @@ export interface initImageOrVideoUrl {
 const initImageOrVideoUrl: initImageOrVideoUrl[] = [];
 
 const CreatePost = () => {
+    const [chosenEmoji, setChosenEmoji] = useState<EmojiClickData>();
+    const [descriptionPost, setDescriptionPost] = useState('');
     const [fileList, setFileList] = useState<FileList | null>();
     const [aspect, setAspect] = useState(16 / 9);
     const [isOpenDiscardPost, setIsOpenDiscardPost] = useState(false);
@@ -37,8 +44,6 @@ const CreatePost = () => {
     const [isConvertCropped, setIsConvertCropped] = useState(false);
     const [isShowDescription, setIsShowDescription] = useState(false);
     // console.log(listFilePost, listUrlCropped);
-    console.log(listUrlCropped);
-
     const handleCrop = async () => {
         setIsConvertCropped(true);
         try {
@@ -85,6 +90,18 @@ const CreatePost = () => {
         setFileList(null);
         setIsOpenDiscardPost(false);
     };
+
+    const handleChangeInput = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+        if (e.target.value.length <= 2200) {
+            setDescriptionPost(e.target.value);
+        }
+    };
+
+    useEffect(() => {
+        if (descriptionPost.length < 2200 && chosenEmoji) {
+            setDescriptionPost((prev) => prev + chosenEmoji?.emoji);
+        }
+    }, [chosenEmoji]);
 
     useEffect(() => {
         if (fileList) {
@@ -177,7 +194,7 @@ const CreatePost = () => {
                     </div>
                 ) : (
                     listUrlCropped.length > 0 && (
-                        <Button onClick={() => console.log('share')} isOnlyText extendsClassName="p-2">
+                        <Button onClick={() => console.log(descriptionPost)} isOnlyText extendsClassName="p-2">
                             Share
                         </Button>
                     )
@@ -215,7 +232,45 @@ const CreatePost = () => {
                     </div>
                 )}
                 {listUrlCropped.length > 0 && !isConvertCropped && isShowDescription && (
-                    <div className="w-[340px] h-full border-l border-l-secondary-button-hover">hello</div>
+                    <div className="w-[340px] h-full border-l border-l-secondary-button-hover px-4">
+                        <div className="mt-[18px] mb-[14px] flex items-center">
+                            <div className="w-[28px] h-[28px] rounded-[50%] overflow-hidden mr-3 ">
+                                <img src={avatar} alt="avatar" className="block h-full " />
+                            </div>
+                            <h5 className="font-medium">t.tien_01</h5>
+                        </div>
+                        <div className="relative">
+                            <form>
+                                <Comment descriptionPost={descriptionPost} onChange={handleChangeInput} />
+                            </form>
+                            <div className="flex items-center justify-between h-[44px]">
+                                <div>
+                                    <EmojiIcons setChosenEmoji={setChosenEmoji} />
+                                </div>
+                                <div className="text-tertiary-text text-[12px]">
+                                    {descriptionPost.length || 0}/2,200
+                                </div>
+                            </div>
+                            <div className="flex items-center py-2 px-[14px] justify-between border-t border-t-separator">
+                                <div className="text-[16px]">Something</div>
+                                <div className="rotate-180">
+                                    <ArrowIcon width={16} height={16} />
+                                </div>
+                            </div>
+                            <div className="flex items-center py-2 px-[14px] justify-between border-t  border-t-separator ">
+                                <div className="text-[16px]">Accessibility</div>
+                                <div className="rotate-180">
+                                    <ArrowIcon width={16} height={16} />
+                                </div>
+                            </div>
+                            <div className="flex items-center py-2 px-[14px] justify-between border-t border-b border-t-separator border-b-separator">
+                                <div className="text-[16px]">Advanced settings</div>
+                                <div className="rotate-180">
+                                    <ArrowIcon width={16} height={16} />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 )}
             </div>
         </div>

@@ -1,5 +1,3 @@
-import React from 'react';
-
 const IconClosePost = () => {
     return (
         <svg aria-label="Close" fill="white" height={18} role="img" viewBox="0 0 24 24" width={18}>

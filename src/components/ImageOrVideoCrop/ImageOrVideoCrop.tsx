@@ -49,7 +49,7 @@ const ImageOrVideoCrop = ({
         setImageOrVideoUrl((prev) => {
             const lastArray = prev;
             const newArray = lastArray.map((item) => {
-                if (item.url === url) {
+                if (item.url === url && !item.type.includes('image')) {
                     return { ...item, cropInit: location };
                 }
                 return item;

@@ -1,5 +1,3 @@
-import React from 'react';
-
 const IconAspect16_9 = () => {
     return (
         <svg aria-label="Crop landscape icon" fill="currentColor" height={24} role="img" viewBox="0 0 24 24" width={24}>

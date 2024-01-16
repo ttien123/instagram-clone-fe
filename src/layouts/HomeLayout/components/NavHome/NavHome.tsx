@@ -17,6 +17,58 @@ import ContentNotification from '../ContentNotification';
 import Dialog from 'src/components/Dialog';
 import CreatePost from '../CreatePost';
 import { useState } from 'react';
+import DropDown from 'src/components/DropDown';
+import IconSetting from 'src/assets/IconSetting';
+import IconActivity from 'src/assets/IconActivity';
+import IconSaved from 'src/assets/IconSaved';
+import IconSwitchLight from 'src/assets/IconSwitchLight';
+import IconReport from 'src/assets/IconReport';
+
+const MoreActivity = () => {
+    return (
+        <div className="w-[266px] bg-white overflow-hidden rounded-2xl shadow-always-black">
+            <div className="p-2">
+                <div>
+                    <ItemLink Icon={<IconSetting />} IconActive={<IconSetting />} name="Setting" isMoreActivity />
+                </div>
+                <div>
+                    <ItemLink
+                        Icon={<IconActivity />}
+                        IconActive={<IconActivity />}
+                        name="Your activity"
+                        isMoreActivity
+                    />
+                </div>
+                <div>
+                    <ItemLink Icon={<IconSaved />} IconActive={<IconSaved />} name="Saved" isMoreActivity />
+                </div>
+                <div>
+                    <ItemLink
+                        Icon={<IconSwitchLight />}
+                        IconActive={<IconSwitchLight />}
+                        name="Switch appearance"
+                        isMoreActivity
+                    />
+                </div>
+            </div>
+            <div>
+                <ItemLink Icon={<IconReport />} IconActive={<IconSetting />} name="Report a problem" isMoreActivity />
+            </div>
+            <div className="h-[6px] bg-stroke opacity-30"></div>
+            <div className="p-2">
+                <div>
+                    <ItemLink name="Switch accounts" isMoreActivity />
+                </div>
+            </div>
+            <div className="h-[0.5px] bg-stroke opacity-30"></div>
+            <div className="p-2">
+                <div>
+                    <ItemLink name="Log out" isMoreActivity />
+                </div>
+            </div>
+        </div>
+    );
+};
 
 interface Props {
     isShowAll: boolean;
@@ -25,6 +77,7 @@ interface Props {
 
 const NavHome = ({ setIsShowAll, isShowAll }: Props) => {
     const [isOpenCreatePost, setIsOpenCreatePost] = useState(false);
+    const [isOpenMore, setIsOpenMore] = useState(false);
 
     return (
         <div
@@ -57,8 +110,8 @@ const NavHome = ({ setIsShowAll, isShowAll }: Props) => {
             <div className="flex flex-col flex-1 justify-between">
                 <div className="flex md:flex-col items-center justify-around md:items-start">
                     <ItemLink
-                        Icon={IconHome}
-                        IconActive={IconHomeActive}
+                        Icon={<IconHome />}
+                        IconActive={<IconHomeActive />}
                         name="Home"
                         to={path.home}
                         isShowAll={isShowAll}
@@ -75,8 +128,8 @@ const NavHome = ({ setIsShowAll, isShowAll }: Props) => {
                         />
                     </div>
                     <ItemLink
-                        Icon={IconMessages}
-                        IconActive={IconMessagesActive}
+                        Icon={<IconMessages />}
+                        IconActive={<IconMessagesActive />}
                         name="Messages"
                         to={path.messages}
                         isShowAll={isShowAll}
@@ -100,8 +153,8 @@ const NavHome = ({ setIsShowAll, isShowAll }: Props) => {
                         classNameChildren="w-full"
                     >
                         <ItemLink
-                            Icon={IconCreate}
-                            IconActive={IconCreate}
+                            Icon={<IconCreate />}
+                            IconActive={<IconCreate />}
                             name="Create"
                             isShowAll={isShowAll}
                             setIsShowAll={setIsShowAll}
@@ -117,21 +170,27 @@ const NavHome = ({ setIsShowAll, isShowAll }: Props) => {
                 </div>
                 <div className="hidden md:block ">
                     <ItemLink
-                        Icon={IconThreads}
-                        IconActive={IconThreads}
+                        Icon={<IconThreads />}
+                        IconActive={<IconThreads />}
                         name="Threads"
                         isShowAll={isShowAll}
                         setIsShowAll={setIsShowAll}
                     />
                     <div className="w-full hidden md:block">
-                        <ItemNavPopover
-                            Icon={IconMenu}
-                            IconActive={IconMenuActive}
-                            name="More"
-                            isShowAll={isShowAll}
-                            setIsShowAll={setIsShowAll}
-                            ContentValue={<ContentNotification />}
-                        />
+                        <DropDown
+                            renderPopover={<MoreActivity />}
+                            isOpen={isOpenMore}
+                            setIsOpen={setIsOpenMore}
+                            classNameRender="z-50 !translate-x-0 !top-[unset] bottom-[20px] lef xl:bottom-[80px] !left-[72px] xl!left-4"
+                        >
+                            <ItemLink
+                                Icon={<IconMenu />}
+                                IconActive={<IconMenuActive />}
+                                name="More"
+                                isShowAll={isShowAll}
+                                setIsShowAll={setIsShowAll}
+                            />
+                        </DropDown>
                     </div>
                 </div>
             </div>

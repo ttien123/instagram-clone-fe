@@ -26,10 +26,14 @@ export default {
                 stroke: 'rgb(219, 219, 219)',
                 separator: 'rgb(219, 219, 219)',
                 'error-or-destructive': 'rgb(237, 73, 86)',
+                'tertiary-text': 'rgb(199, 199, 199)',
             },
             boxShadow: {
                 popoverShadow: '4px 0 24px rgba(0, 0, 0,.15)',
                 'always-black': '0 4px 12px rgba(0, 0, 0,.15)',
+            },
+            dropShadow: {
+                dropEmoji: '0 0 5px rgba(0,0,0,.0975)',
             },
             keyframes: {
                 loading: {

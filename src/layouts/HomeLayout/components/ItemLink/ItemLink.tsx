@@ -1,35 +1,41 @@
+import React from 'react';
 import classNames from 'classnames';
 import { useMatch } from 'react-router-dom';
 import Button from 'src/components/Button';
 
 interface Props {
     name: string;
-    Icon?: () => JSX.Element;
-    IconActive?: () => JSX.Element;
+    Icon?: React.ReactNode;
+    IconActive?: React.ReactNode;
     to?: string;
     isShowAll?: boolean;
+    isMoreActivity?: boolean;
     src?: string;
-    setIsShowAll: React.Dispatch<React.SetStateAction<boolean>>;
+    setIsShowAll?: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const ItemLink = ({ Icon, IconActive, name, to, isShowAll, setIsShowAll, src }: Props) => {
+const ItemLink = ({ Icon, IconActive, name, to, isShowAll, setIsShowAll, src, isMoreActivity }: Props) => {
     const match = useMatch(`${to}`);
     const handleClick = () => {
         if (name === 'Create') {
             return;
         } else {
             if (name !== 'Messages') {
-                setIsShowAll(true);
+                setIsShowAll && setIsShowAll(true);
             } else {
-                setIsShowAll(false);
+                setIsShowAll && setIsShowAll(false);
             }
         }
     };
     return (
         <Button to={to} className="w-full cursor-pointer " onClick={handleClick}>
-            <div className="flex items-center justify-center xl:justify-start py-3 px-[10px] my-1 w-full xl:hover:bg-hover-overlay transition-all duration-300 rounded-lg">
+            <div
+                className={`flex items-center justify-center xl:justify-start py-3 px-[10px] my-1 w-full ${
+                    isMoreActivity ? 'hover:bg-hover-overlay' : 'xl:hover:bg-hover-overlay'
+                } transition-all duration-300 rounded-lg`}
+            >
                 {!src && IconActive && Icon && (
-                    <div>{match && (name !== 'Messages' ? isShowAll : true) ? <IconActive /> : <Icon />}</div>
+                    <div>{match && (name !== 'Messages' ? isShowAll : true) ? IconActive : Icon}</div>
                 )}
                 {src && (
                     <div
@@ -49,6 +55,7 @@ const ItemLink = ({ Icon, IconActive, name, to, isShowAll, setIsShowAll, src }: 
                         {name}
                     </div>
                 )}
+                {isMoreActivity && <div className={`block text-[14px] pl-4 font-medium flex-1 text-left`}>{name}</div>}
             </div>
         </Button>
     );

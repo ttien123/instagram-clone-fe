@@ -21,6 +21,10 @@ interface Props {
     isNotify?: boolean;
     isOpen: boolean;
     setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
+    setOffset?: {
+        mainAxis?: number;
+        crossAxis?: number;
+    };
 }
 
 const DropDown = ({
@@ -31,13 +35,17 @@ const DropDown = ({
     isNotify,
     isOpen,
     setIsOpen,
+    setOffset = {
+        mainAxis: 10,
+        crossAxis: 10,
+    },
 }: Props) => {
     // const [isOpen, setIsOpen] = useState(false);
 
     const { refs, floatingStyles, context } = useFloating({
         open: isOpen,
         onOpenChange: setIsOpen,
-        middleware: [offset(10), flip(), shift()],
+        middleware: [offset(setOffset), flip(), shift()],
         whileElementsMounted: autoUpdate,
     });
     const click = useClick(context);
