@@ -12,24 +12,78 @@ import IconCreate from 'src/assets/IconCreate';
 import IconThreads from 'src/assets/IconThreads';
 import avatar from 'src/assets/AuthImg/technology-computer-creative-design.jpg';
 import { Link } from 'react-router-dom';
+import ContentSearch from '../ContentSearch';
+import ContentNotification from '../ContentNotification';
+import Dialog from 'src/components/Dialog';
+import CreatePost from '../CreatePost';
+import { useState } from 'react';
+import DropDown from 'src/components/DropDown';
+import IconSetting from 'src/assets/IconSetting';
+import IconActivity from 'src/assets/IconActivity';
+import IconSaved from 'src/assets/IconSaved';
+import IconSwitchLight from 'src/assets/IconSwitchLight';
+import IconReport from 'src/assets/IconReport';
+
+const MoreActivity = () => {
+    return (
+        <div className="w-[266px] bg-white overflow-hidden rounded-2xl shadow-always-black">
+            <div className="p-2">
+                <div>
+                    <ItemLink Icon={<IconSetting />} IconActive={<IconSetting />} name="Setting" isMoreActivity />
+                </div>
+                <div>
+                    <ItemLink
+                        Icon={<IconActivity />}
+                        IconActive={<IconActivity />}
+                        name="Your activity"
+                        isMoreActivity
+                    />
+                </div>
+                <div>
+                    <ItemLink Icon={<IconSaved />} IconActive={<IconSaved />} name="Saved" isMoreActivity />
+                </div>
+                <div>
+                    <ItemLink
+                        Icon={<IconSwitchLight />}
+                        IconActive={<IconSwitchLight />}
+                        name="Switch appearance"
+                        isMoreActivity
+                    />
+                </div>
+            </div>
+            <div>
+                <ItemLink Icon={<IconReport />} IconActive={<IconSetting />} name="Report a problem" isMoreActivity />
+            </div>
+            <div className="h-[6px] bg-stroke opacity-30"></div>
+            <div className="p-2">
+                <div>
+                    <ItemLink name="Switch accounts" isMoreActivity />
+                </div>
+            </div>
+            <div className="h-[0.5px] bg-stroke opacity-30"></div>
+            <div className="p-2">
+                <div>
+                    <ItemLink name="Log out" isMoreActivity />
+                </div>
+            </div>
+        </div>
+    );
+};
 
 interface Props {
     isShowAll: boolean;
     setIsShowAll: React.Dispatch<React.SetStateAction<boolean>>;
 }
-const ContentSearch = () => {
-    return <div>search</div>;
-};
-const ContentNotification = () => {
-    return <div>ContentNotification</div>;
-};
 
 const NavHome = ({ setIsShowAll, isShowAll }: Props) => {
+    const [isOpenCreatePost, setIsOpenCreatePost] = useState(false);
+    const [isOpenMore, setIsOpenMore] = useState(false);
+
     return (
         <div
             className={`${
                 isShowAll ? 'xl:w-[244px]' : 'w-[72px]'
-            } transition-all duration-500 pt-2 px-3 pb-5 md:h-[100vh] bg-white border-r-separator border-r fixed w-full md:w-[72px] bottom-0 md:left-0 z-10 flex flex-col`}
+            } transition-all duration-500 md:pt-2 px-3 md:pb-5 md:h-[100vh] bg-white border-r-separator border-r fixed w-full md:w-[72px] bottom-0 md:left-0 z-10 flex flex-col`}
         >
             <div className="h-[92px] hidden md:flex items-center justify-center">
                 <Link
@@ -56,8 +110,8 @@ const NavHome = ({ setIsShowAll, isShowAll }: Props) => {
             <div className="flex flex-col flex-1 justify-between">
                 <div className="flex md:flex-col items-center justify-around md:items-start">
                     <ItemLink
-                        Icon={IconHome}
-                        IconActive={IconHomeActive}
+                        Icon={<IconHome />}
+                        IconActive={<IconHomeActive />}
                         name="Home"
                         to={path.home}
                         isShowAll={isShowAll}
@@ -70,12 +124,12 @@ const NavHome = ({ setIsShowAll, isShowAll }: Props) => {
                             name="Search"
                             isShowAll={isShowAll}
                             setIsShowAll={setIsShowAll}
-                            ContentValue={ContentSearch}
+                            ContentValue={<ContentSearch />}
                         />
                     </div>
                     <ItemLink
-                        Icon={IconMessages}
-                        IconActive={IconMessagesActive}
+                        Icon={<IconMessages />}
+                        IconActive={<IconMessagesActive />}
                         name="Messages"
                         to={path.messages}
                         isShowAll={isShowAll}
@@ -88,19 +142,27 @@ const NavHome = ({ setIsShowAll, isShowAll }: Props) => {
                             name="Notifications"
                             isShowAll={isShowAll}
                             setIsShowAll={setIsShowAll}
-                            ContentValue={ContentNotification}
+                            ContentValue={<ContentNotification />}
                         />
                     </div>
-                    <ItemLink
-                        Icon={IconCreate}
-                        IconActive={IconCreate}
-                        name="Create"
-                        isShowAll={isShowAll}
-                        setIsShowAll={setIsShowAll}
-                    />
+                    <Dialog
+                        isOpen={isOpenCreatePost}
+                        setIsOpen={setIsOpenCreatePost}
+                        isBtnClose
+                        renderPopover={<CreatePost />}
+                        classNameChildren="w-full"
+                    >
+                        <ItemLink
+                            Icon={<IconCreate />}
+                            IconActive={<IconCreate />}
+                            name="Create"
+                            isShowAll={isShowAll}
+                            setIsShowAll={setIsShowAll}
+                        />
+                    </Dialog>
                     <ItemLink
                         src={avatar}
-                        name="Home"
+                        name="Profile"
                         to={path.profile}
                         isShowAll={isShowAll}
                         setIsShowAll={setIsShowAll}
@@ -108,21 +170,27 @@ const NavHome = ({ setIsShowAll, isShowAll }: Props) => {
                 </div>
                 <div className="hidden md:block ">
                     <ItemLink
-                        Icon={IconThreads}
-                        IconActive={IconThreads}
+                        Icon={<IconThreads />}
+                        IconActive={<IconThreads />}
                         name="Threads"
                         isShowAll={isShowAll}
                         setIsShowAll={setIsShowAll}
                     />
                     <div className="w-full hidden md:block">
-                        <ItemNavPopover
-                            Icon={IconMenu}
-                            IconActive={IconMenuActive}
-                            name="More"
-                            isShowAll={isShowAll}
-                            setIsShowAll={setIsShowAll}
-                            ContentValue={ContentNotification}
-                        />
+                        <DropDown
+                            renderPopover={<MoreActivity />}
+                            isOpen={isOpenMore}
+                            setIsOpen={setIsOpenMore}
+                            classNameRender="z-50 !translate-x-0 !top-[unset] bottom-[20px] lef xl:bottom-[80px] !left-[72px] xl!left-4"
+                        >
+                            <ItemLink
+                                Icon={<IconMenu />}
+                                IconActive={<IconMenuActive />}
+                                name="More"
+                                isShowAll={isShowAll}
+                                setIsShowAll={setIsShowAll}
+                            />
+                        </DropDown>
                     </div>
                 </div>
             </div>

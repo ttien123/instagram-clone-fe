@@ -15,7 +15,6 @@ export const authSchema = yup.object({
                     return true;
                 }
                 if (/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) {
-                    console.log('isEmail');
                     return true;
                 }
                 return false;
