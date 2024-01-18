@@ -45,7 +45,7 @@ const HeaderHomePage = () => {
                     </Button>
                 </DropDown>
                 <div className="flex items-center ">
-                    <div className="w-[250px] mr-3">
+                    <div className=" w-[250px] mr-3">
                         <InputSearch isMobile />
                     </div>
                     <DropDown

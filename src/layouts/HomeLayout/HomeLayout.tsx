@@ -12,7 +12,10 @@ const HomeLayout = ({ children }: Props) => {
     return (
         <div className="flex">
             <NavHome isShowAll={isShowAll} setIsShowAll={setIsShowAll} />
-            <div className="w-full md:ml-[72px] xl:ml-[244px] h-[100vh]" onClick={(e) => !match && setIsShowAll(true)}>
+            <div
+                className="w-full px-4 md:px-0 md:ml-[72px] xl:ml-[244px] h-[100vh]"
+                onClick={(e) => !match && setIsShowAll(true)}
+            >
                 {children}
             </div>
         </div>
