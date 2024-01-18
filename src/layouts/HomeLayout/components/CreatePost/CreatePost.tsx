@@ -11,7 +11,7 @@ import avatar from 'src/assets/AuthImg/technology-computer-creative-design.jpg';
 import Input from 'src/components/Input';
 import EmojiPicker, { EmojiClickData } from 'emoji-picker-react';
 import EmojiIcons from 'src/components/EmojiIcons';
-import Comment from 'src/components/Comment';
+import WriteDescription from 'src/components/WriteDescription';
 import ArrowIcon from 'src/assets/ArrowLeft';
 
 export interface initImageOrVideoUrl {
@@ -44,6 +44,9 @@ const CreatePost = () => {
     const [isConvertCropped, setIsConvertCropped] = useState(false);
     const [isShowDescription, setIsShowDescription] = useState(false);
     // console.log(listFilePost, listUrlCropped);
+
+    console.log(imageOrVideoUrl);
+
     const handleCrop = async () => {
         setIsConvertCropped(true);
         try {
@@ -241,7 +244,7 @@ const CreatePost = () => {
                         </div>
                         <div className="relative">
                             <form>
-                                <Comment descriptionPost={descriptionPost} onChange={handleChangeInput} />
+                                <WriteDescription descriptionPost={descriptionPost} onChange={handleChangeInput} />
                             </form>
                             <div className="flex items-center justify-between h-[44px]">
                                 <div>

@@ -1,6 +1,6 @@
-const IconSaved = () => {
+const IconSaved = ({ height = 18, width = 18 }: { width?: number; height?: number }) => {
     return (
-        <svg aria-label="Saved" fill="currentColor" height={18} role="img" viewBox="0 0 24 24" width={18}>
+        <svg aria-label="Saved" fill="currentColor" height={height} role="img" viewBox="0 0 24 24" width={width}>
             <title>Saved</title>
             <polygon
                 fill="none"

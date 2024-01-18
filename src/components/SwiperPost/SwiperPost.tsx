@@ -1,6 +1,5 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useState } from 'react';
 import { Swiper, SwiperSlide, useSwiper } from 'swiper/react';
-import ArrowIcon from 'src/assets/ArrowLeft';
 import { Pagination, EffectFade, Navigation } from 'swiper/modules';
 import * as Slider from '@radix-ui/react-slider';
 import ImageOrVideoCrop from '../ImageOrVideoCrop';
@@ -9,12 +8,12 @@ import listAspect from 'src/constants/listAspect';
 import classNames from 'classnames';
 import IconAspect from 'src/assets/IconAspect';
 import IconZoom from 'src/assets/IconZoom';
+import { initImageOrVideoUrl } from 'src/layouts/HomeLayout/components/CreatePost/CreatePost';
 
 import 'swiper/css/effect-fade';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
 import 'swiper/css';
-import { initImageOrVideoUrl } from 'src/layouts/HomeLayout/components/CreatePost/CreatePost';
 
 interface Props {
     ImageOrVideoUrl: initImageOrVideoUrl[];
@@ -36,7 +35,6 @@ const SwiperPost = ({
     const [swiperSlide, setSwiperSlide] = useState(0);
     const [isOpenAspect, setIsOpenAspect] = useState(false);
     const [isOpenZoom, setIsOpenZoom] = useState(false);
-    // const [valueZoomInput, setValueZoomInput] = useState(1);
     const handleChangeZoom = (value: number[]) => {
         setImageOrVideoUrl((prev) => {
             const lastArray = prev;
@@ -60,7 +58,7 @@ const SwiperPost = ({
             speed={0}
             allowTouchMove={false}
             modules={[Pagination, EffectFade, Navigation]}
-            className="w-full "
+            className="w-full swiperPost"
             style={{ position: 'unset' }}
             onSlideChange={(swiper) => {
                 setSwiperSlide(swiper.activeIndex);
@@ -68,22 +66,6 @@ const SwiperPost = ({
         >
             {listUrlCropped.length > 0 &&
                 listUrlCropped.map((item, index) => {
-                    // return (
-                    //     <SwiperSlide
-                    //         key={index}
-                    //         className={`h-[489px] ${aspect === 16 / 9 && '!h-[275px]'} ${
-                    //             aspect === 4 / 3 && '!h-[366px]'
-                    //         } `}
-                    //     >
-                    //         {item.type.includes('image') ? (
-                    //             <img src={item.url} alt="img" />
-                    //         ) : (
-                    //             <video className="">
-                    //                 <source src={item.url} />
-                    //             </video>
-                    //         )}
-                    //     </SwiperSlide>
-                    // );
                     return (
                         <SwiperSlide
                             key={index}
@@ -113,7 +95,6 @@ const SwiperPost = ({
                         </SwiperSlide>
                     );
                 })}
-
             {!(listUrlCropped.length > 0) && (
                 <DropDown
                     isOpen={isOpenAspect}

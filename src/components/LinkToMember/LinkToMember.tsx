@@ -5,12 +5,14 @@ import Button from '../Button';
 interface Props {
     isSearchRecent?: boolean;
     isBtnFollow?: boolean;
+    isBtnFollowText?: boolean;
     isFollowing?: boolean;
+    isSwitch?: boolean;
 }
 
-const LinkToMember = ({ isSearchRecent, isBtnFollow, isFollowing }: Props) => {
+const LinkToMember = ({ isSearchRecent, isBtnFollow, isFollowing, isSwitch, isBtnFollowText }: Props) => {
     return (
-        <div className="px-6 py-2 w-full hover:bg-secondary-background">
+        <div className={`py-2 w-full ${isSwitch ? 'px-4' : 'hover:bg-secondary-background px-6'} `}>
             <div className="flex items-center justify-between">
                 <div className="flex items-center justify-start">
                     <div className="w-[44px] h-[44px] rounded-[50%] overflow-hidden mr-3">
@@ -27,7 +29,17 @@ const LinkToMember = ({ isSearchRecent, isBtnFollow, isFollowing }: Props) => {
                     </div>
                 )}
                 {isBtnFollow && <Button isbgButton>Follow</Button>}
+                {isBtnFollowText && (
+                    <Button isOnlyText extendsClassName="!text-[12px] font-semibold">
+                        Follow
+                    </Button>
+                )}
                 {isFollowing && <Button isBtnType2={isFollowing}>Following</Button>}
+                {isSwitch && (
+                    <Button isOnlyText extendsClassName="!text-[12px] font-semibold">
+                        Switch
+                    </Button>
+                )}
             </div>
         </div>
     );

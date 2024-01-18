@@ -5,9 +5,11 @@ import DropDown from '../DropDown';
 
 interface Props {
     setChosenEmoji: React.Dispatch<React.SetStateAction<EmojiClickData | undefined>>;
+    width?: number;
+    height?: number;
 }
 
-const EmojiIcons = ({ setChosenEmoji }: Props) => {
+const EmojiIcons = ({ setChosenEmoji, height, width }: Props) => {
     const [isOpen, setIsOpen] = useState(false);
     const onEmojiClick = (emojiData: EmojiClickData) => {
         setChosenEmoji(emojiData);
@@ -15,8 +17,8 @@ const EmojiIcons = ({ setChosenEmoji }: Props) => {
     return (
         <div className="relative">
             <DropDown
-                classNameRender="z-[50] !top-8 !translate-x-0 !left-[-10px] drop-shadow-dropEmoji"
-                classNameWrapper="relative"
+                classNameRender="z-[30] !top-8 !translate-x-0 !left-[-10px] drop-shadow-dropEmoji"
+                classNameWrapper="relative z-10"
                 isOpen={isOpen}
                 setOffset={{
                     crossAxis: 0,
@@ -38,8 +40,8 @@ const EmojiIcons = ({ setChosenEmoji }: Props) => {
                     </div>
                 }
             >
-                <button onClick={() => setIsOpen(true)} className="text-secondary-text">
-                    <IconEmoji />
+                <button onClick={() => setIsOpen(true)} className="text-secondary-text block h-full relative z-[-1]">
+                    <IconEmoji width={width} height={height} />
                 </button>
             </DropDown>
         </div>
