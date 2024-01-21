@@ -7,9 +7,11 @@ interface Props {
     setChosenEmoji: React.Dispatch<React.SetStateAction<EmojiClickData | undefined>>;
     width?: number;
     height?: number;
+    isIconBlack?: boolean;
+    isBottom?: boolean;
 }
 
-const EmojiIcons = ({ setChosenEmoji, height, width }: Props) => {
+const EmojiIcons = ({ setChosenEmoji, height, width, isIconBlack, isBottom }: Props) => {
     const [isOpen, setIsOpen] = useState(false);
     const onEmojiClick = (emojiData: EmojiClickData) => {
         setChosenEmoji(emojiData);
@@ -17,7 +19,9 @@ const EmojiIcons = ({ setChosenEmoji, height, width }: Props) => {
     return (
         <div className="relative">
             <DropDown
-                classNameRender="z-[30] !top-8 !translate-x-0 !left-[-10px] drop-shadow-dropEmoji"
+                classNameRender={`z-[30] ${
+                    isBottom ? '!bottom-8 !top-[unset]' : '!top-8 !left-[-10px]'
+                } !translate-x-0  drop-shadow-dropEmoji`}
                 classNameWrapper="relative z-10"
                 isOpen={isOpen}
                 setOffset={{
@@ -40,7 +44,10 @@ const EmojiIcons = ({ setChosenEmoji, height, width }: Props) => {
                     </div>
                 }
             >
-                <button onClick={() => setIsOpen(true)} className="text-secondary-text block h-full relative z-[-1]">
+                <button
+                    onClick={() => setIsOpen(true)}
+                    className={`${isIconBlack ? 'text-black' : 'text-secondary-text'} block h-full relative z-[-1]`}
+                >
                     <IconEmoji width={width} height={height} />
                 </button>
             </DropDown>

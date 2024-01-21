@@ -1,6 +1,7 @@
 const path = {
     home: '/',
-    messages: '/Messages',
+    messages: '/messages',
+    messageId: '/messages/:id',
     signUp: '/signup',
     logined: '/logined',
     signIn: '/signIn',

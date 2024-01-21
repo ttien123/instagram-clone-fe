@@ -5,7 +5,7 @@ import Suggestion from './components/Suggestion';
 
 const HomePage = () => {
     return (
-        <div>
+        <div className=" px-4 md:px-0">
             <HeaderHomePage />
             <div className="mt-[60px] md:mt-0">
                 <div className="flex items-start justify-center">
