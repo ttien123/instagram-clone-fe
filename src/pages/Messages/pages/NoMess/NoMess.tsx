@@ -3,7 +3,7 @@ import Button from 'src/components/Button';
 
 const NoMess = () => {
     return (
-        <div className="w-full h-full flex items-center justify-center flex-col">
+        <div className="hidden w-full h-full md:flex items-center justify-center flex-col">
             <div>
                 <IconChooseMess />
             </div>

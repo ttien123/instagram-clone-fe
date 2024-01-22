@@ -9,13 +9,11 @@ interface Props {
 const HomeLayout = ({ children }: Props) => {
     const matchId = useMatch(`/messages/:id`);
     const match = useMatch(`/messages`);
-    console.log(Boolean(!(match || matchId)));
     const [isShowAll, setIsShowAll] = useState(Boolean(!(match || matchId)));
-    console.log(isShowAll);
 
     return (
         <div className="flex">
-            {<NavHome isShowAll={isShowAll} setIsShowAll={setIsShowAll} />}
+            {<NavHome isPageMess={Boolean(match || matchId)} isShowAll={isShowAll} setIsShowAll={setIsShowAll} />}
             <div
                 className={`w-full md:ml-[72px] ${Boolean(!(match || matchId)) ? 'xl:ml-[244px] ' : ''}`}
                 onClick={() => Boolean(!(match || matchId)) && setIsShowAll(true)}

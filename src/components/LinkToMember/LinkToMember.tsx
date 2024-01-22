@@ -33,16 +33,20 @@ const LinkToMember = ({
                 isActive && 'bg-highlight-background'
             }`}
         >
-            <div className={`flex items-center  ${isMess ? 'justify-center xl:justify-between' : 'justify-between'}`}>
+            <div
+                className={`flex items-center ${
+                    isMess ? 'justify-start md:justify-center xl:justify-between' : 'justify-between'
+                }`}
+            >
                 <div className={`flex items-center ${isMess ? 'justify-center' : 'justify-start'}`}>
                     <div
                         className={`w-[44px] h-[44px] rounded-[50%] overflow-hidden ${
-                            isMess ? 'mr-0 xl:mr-3' : 'mr-3'
+                            isMess ? 'mr-3 md:mr-0 xl:mr-3' : 'mr-3'
                         } `}
                     >
                         <Avatar src={member} />
                     </div>
-                    <div className={`${isMess ? 'hidden xl:block' : ''}`}>
+                    <div className={`${isMess ? 'md:hidden xl:block' : ''}`}>
                         <h4 className="font-semibold text-left">t.tien_01</h4>
                         <p className="text-secondary-text">Nguyễn Thế Tiến</p>
                     </div>
