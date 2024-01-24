@@ -13,7 +13,7 @@ const HeaderHomePage = () => {
     const [isOpenNotify, setIsOpenNotify] = useState(false);
     const [isOpenStyle, setIsOpenStyle] = useState(false);
     return (
-        <div className="fixed z-[100] top-0 left-0 right-0 h-[60px] md:hidden bg-white">
+        <div className="fixed z-[80] top-0 left-0 right-0 h-[60px] md:hidden bg-white">
             <div className="px-4 flex items-center justify-between h-full">
                 <DropDown
                     isOpen={isOpenStyle}

@@ -152,6 +152,7 @@ const NavHome = ({ setIsShowAll, isShowAll, isPageMess }: Props) => {
                         isBtnClose
                         renderPopover={<CreatePost />}
                         classNameChildren="w-full"
+                        extendsClassName="z-[1000]"
                     >
                         <ItemLink
                             Icon={<IconCreate />}

@@ -58,7 +58,7 @@ const SwiperPost = ({
             speed={0}
             allowTouchMove={false}
             modules={[Pagination, EffectFade, Navigation]}
-            className="w-full swiperPost"
+            className="w-full h-full swiperPost"
             style={{ position: 'unset' }}
             onSlideChange={(swiper) => {
                 setSwiperSlide(swiper.activeIndex);
@@ -71,7 +71,7 @@ const SwiperPost = ({
                             key={index}
                             className={`h-[489px] ${aspect === 16 / 9 && '!h-[275px]'} ${
                                 aspect === 4 / 3 && '!h-[366px]'
-                            } `}
+                            }`}
                         >
                             <ImageOrVideoCrop
                                 {...item}
@@ -87,7 +87,7 @@ const SwiperPost = ({
                     return (
                         <SwiperSlide
                             key={index}
-                            className={`h-[489px] ${aspect === 16 / 9 && '!h-[275px]'} ${
+                            className={`h-[390px] md:h-[489px] w-full ${aspect === 16 / 9 && '!h-[275px]'} ${
                                 aspect === 4 / 3 && '!h-[366px]'
                             } `}
                         >
@@ -99,7 +99,7 @@ const SwiperPost = ({
                 <DropDown
                     isOpen={isOpenAspect}
                     setIsOpen={setIsOpenAspect}
-                    classNameRender=" !translate-x-0 bottom-16 !left-4 !top-[unset] !translate-y-0 z-50"
+                    classNameRender=" !translate-x-0 bottom-16 !left-16 md:!left-4 !top-[unset] !translate-y-0 z-50"
                     renderPopover={
                         <div className="w-[120px] bg-btnSlide rounded-lg">
                             {listAspect.map((item, index) => (
@@ -137,7 +137,7 @@ const SwiperPost = ({
                     <div
                         className={`${
                             isOpenAspect ? 'bg-white text-black' : 'bg-btnSlide text-white'
-                        } absolute bottom-4 left-4 rounded-[50%] shadow-popoverShadow cursor-pointer z-50 w-[32px] h-[32px] flex items-center justify-center `}
+                        } absolute bottom-4 left-16 md:left-4 rounded-[50%] shadow-popoverShadow cursor-pointer z-50 w-[32px] h-[32px] flex items-center justify-center `}
                     >
                         <IconAspect />
                     </div>
@@ -147,7 +147,7 @@ const SwiperPost = ({
                 <DropDown
                     isOpen={isOpenZoom}
                     setIsOpen={setIsOpenZoom}
-                    classNameRender=" !translate-x-0 bottom-16 !left-16 !top-[unset] !translate-y-0 z-50 w-[148px] h-[48px] p-2"
+                    classNameRender=" !translate-x-0 bottom-16 !left-32 md:!left-16 !top-[unset] !translate-y-0 z-50 w-[148px] h-[48px] p-2"
                     renderPopover={
                         <div className=" bg-btnSlide px-2 h-full flex items-center justify-center rounded-lg">
                             <Slider.Root
@@ -176,7 +176,7 @@ const SwiperPost = ({
                     <div
                         className={`${
                             isOpenAspect ? 'bg-white text-black' : 'bg-btnSlide text-white'
-                        } absolute bottom-4 left-16 rounded-[50%] shadow-popoverShadow cursor-pointer z-50 w-[32px] h-[32px] flex items-center justify-center `}
+                        } absolute bottom-4 left-32 md:left-16 rounded-[50%] shadow-popoverShadow cursor-pointer z-50 w-[32px] h-[32px] flex items-center justify-center `}
                     >
                         <IconZoom />
                     </div>

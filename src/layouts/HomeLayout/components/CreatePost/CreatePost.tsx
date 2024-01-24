@@ -45,7 +45,7 @@ const CreatePost = () => {
     const [isShowDescription, setIsShowDescription] = useState(false);
     // console.log(listFilePost, listUrlCropped);
 
-    console.log(imageOrVideoUrl);
+    console.log(listUrlCropped);
 
     const handleCrop = async () => {
         setIsConvertCropped(true);
@@ -130,8 +130,8 @@ const CreatePost = () => {
     return (
         <div
             className={`relative ${
-                listUrlCropped.length > 0 && !isConvertCropped ? 'w-[829px]' : 'w-[489px]'
-            } transition-all duration-300 h-[532px] bg-white flex items-center justify-center flex-col rounded-xl overflow-hidden`}
+                listUrlCropped.length > 0 && !isConvertCropped ? 'md:w-[829px]' : 'w-[489px] max-w-[100vw]'
+            } transition-all duration-300 md:h-[532px] bg-white flex items-center justify-center flex-col rounded-xl`}
         >
             <div
                 className={`flex-1 w-full flex items-center font-semibold border-b px-2 border-b-separator ${
@@ -185,7 +185,6 @@ const CreatePost = () => {
                         <IconBack />
                     </button>
                 )}
-
                 <h3 className="">Create new post</h3>
                 {fileList && !isConvertCropped && !(listUrlCropped.length > 0) ? (
                     <Button onClick={handleCrop} isOnlyText extendsClassName="p-2">
@@ -203,9 +202,9 @@ const CreatePost = () => {
                     )
                 )}
             </div>
-            <div className="flex items-center justify-center relative">
+            <div className="flex items-center justify-center relative w-full">
                 {!fileList ? (
-                    <div className="w-[489px] h-[489px] p-6 flex items-center justify-center flex-col">
+                    <div className="md:w-[489px] w-full h-[489px] p-6 flex items-center justify-center flex-col">
                         <div>
                             <ImgCreatePost />
                         </div>
@@ -215,8 +214,12 @@ const CreatePost = () => {
                         </div>
                     </div>
                 ) : (
-                    <div className="h-[489px] relative flex items-center justify-center">
-                        <div className="w-[489px] flex items-center justify-center  bg-[#FAFAFA]">
+                    <div
+                        className={`${
+                            isShowDescription ? 'hidden md:flex' : 'flex'
+                        } h-[489px] relative w-full md:w-auto items-center justify-center`}
+                    >
+                        <div className="md:w-[489px] w-full flex items-center justify-center  bg-[#FAFAFA]">
                             <div
                                 className={`${aspect === 4 / 5 ? 'w-[391px]' : 'w-[489px]'} ${
                                     aspect === 4 / 3 ? 'h-[366px]' : 'h-[489px]'

@@ -19,19 +19,17 @@ const EmojiIcons = ({ setChosenEmoji, height, width, isIconBlack, isBottom }: Pr
     return (
         <div className="relative">
             <DropDown
-                classNameRender={`z-[30] ${
-                    isBottom ? '!bottom-8 !top-[unset]' : '!top-8 !left-[-10px]'
-                } !translate-x-0  drop-shadow-dropEmoji`}
+                classNameRender={`z-[30]`}
                 classNameWrapper="relative z-10"
                 isOpen={isOpen}
                 setOffset={{
-                    crossAxis: 0,
-                    mainAxis: 0,
+                    crossAxis: 110,
+                    mainAxis: 10,
                 }}
                 setIsOpen={setIsOpen}
                 renderPopover={
                     <div>
-                        <span className="block absolute drop-shadow-dropEmoji top-[-10px] h-[20px] w-[15px] border-x-[20px] border-b-[30px] border-l-transparent border-r-transparent border-b-white"></span>
+                        {/* <span className="block absolute drop-shadow-dropEmoji top-[-10px] h-[20px] w-[15px] border-x-[20px] border-b-[30px] border-l-transparent border-r-transparent border-b-white"></span> */}
                         <EmojiPicker
                             previewConfig={{ showPreview: false }}
                             searchDisabled
