@@ -144,7 +144,7 @@ const CreatePost = () => {
                         setIsOpen={setIsOpenDiscardPost}
                         extendsClassName="z-[100]"
                         renderPopover={
-                            <div className="w-[400px] h-[202px] bg-white z-[100] rounded-xl font-medium text-center text-[14px]">
+                            <div className="w-[400px] max-w-[100vw] h-[202px] bg-white z-[100] rounded-xl font-medium text-center text-[14px]">
                                 <div className="px-8 pt-8 pb-4">
                                     <h2 className="text-[20px]">Discard post?</h2>
                                     <span className="text-secondary-text">
