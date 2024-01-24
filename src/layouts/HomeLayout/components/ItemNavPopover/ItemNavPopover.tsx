@@ -22,7 +22,7 @@ const ItemNavPopover = ({ Icon, IconActive, name, isShowAll, setIsShowAll, Conte
         <div className="w-full">
             <Popover
                 isToggle={true}
-                classNamePosition="!fixed !top-0 !left-[72px] bg-white rounded-r-[16px] !outline-none"
+                classNamePosition="!fixed z-[60] !top-0 !left-[72px] bg-white rounded-r-[16px] !outline-none"
                 open={open}
                 setOpen={setOpen}
                 renderPopover={

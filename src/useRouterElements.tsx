@@ -8,6 +8,8 @@ import SignUp from './pages/SignUp';
 import Logined from './pages/Logined';
 import Profile from './pages/Profile';
 import Messages from './pages/Messages';
+import NoMess from './pages/Messages/pages/NoMess';
+import MessId from './pages/Messages/pages/MessId';
 
 function ProtectedRoute() {
     const isAuthenticated = false;
@@ -37,7 +39,18 @@ const useRouterElements = () => {
                     <Messages />
                 </HomeLayout>
             ),
+            children: [
+                {
+                    path: path.messages,
+                    element: <NoMess />,
+                },
+                {
+                    path: path.messageId,
+                    element: <MessId />,
+                },
+            ],
         },
+
         {
             path: path.profile,
             element: (

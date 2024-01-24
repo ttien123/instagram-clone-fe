@@ -63,6 +63,14 @@ const ImageOrVideoCrop = ({
         setZoom(zoomInit);
     }, [zoomInit]);
 
+    // useEffect(() => {
+    //     const container: any = document.querySelector('.reactEasyCrop_Container');
+    //     container && console.log(container.clientWidth);
+    //     if (container && aspectInit !== 16 / 9) {
+    //         container.style.height = container.clientWidth + 'px';
+    //     }
+    // }, [aspectInit]);
+
     useEffect(() => {
         setImageOrVideoUrl((prev) => {
             const lastArray = prev;

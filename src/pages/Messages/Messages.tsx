@@ -1,7 +1,17 @@
-import React from 'react';
+import UseSideNav from './components/UseSideNav';
+import { Outlet, useMatch } from 'react-router-dom';
 
 const Messages = () => {
-    return <div>Messages</div>;
+    return (
+        <div>
+            <div className="flex h-[100vh]">
+                <UseSideNav />
+                <div className="flex-1 h-full ">
+                    <Outlet />
+                </div>
+            </div>
+        </div>
+    );
 };
 
 export default Messages;

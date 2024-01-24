@@ -11,7 +11,7 @@ import avatar from 'src/assets/AuthImg/technology-computer-creative-design.jpg';
 import Input from 'src/components/Input';
 import EmojiPicker, { EmojiClickData } from 'emoji-picker-react';
 import EmojiIcons from 'src/components/EmojiIcons';
-import Comment from 'src/components/Comment';
+import WriteDescription from 'src/components/WriteDescription';
 import ArrowIcon from 'src/assets/ArrowLeft';
 
 export interface initImageOrVideoUrl {
@@ -44,6 +44,9 @@ const CreatePost = () => {
     const [isConvertCropped, setIsConvertCropped] = useState(false);
     const [isShowDescription, setIsShowDescription] = useState(false);
     // console.log(listFilePost, listUrlCropped);
+
+    console.log(listUrlCropped);
+
     const handleCrop = async () => {
         setIsConvertCropped(true);
         try {
@@ -127,8 +130,8 @@ const CreatePost = () => {
     return (
         <div
             className={`relative ${
-                listUrlCropped.length > 0 && !isConvertCropped ? 'w-[829px]' : 'w-[489px]'
-            } transition-all duration-300 h-[532px] bg-white flex items-center justify-center flex-col rounded-xl overflow-hidden`}
+                listUrlCropped.length > 0 && !isConvertCropped ? 'md:w-[829px]' : 'w-[489px] max-w-[100vw]'
+            } transition-all duration-300 md:h-[532px] bg-white flex items-center justify-center flex-col rounded-xl`}
         >
             <div
                 className={`flex-1 w-full flex items-center font-semibold border-b px-2 border-b-separator ${
@@ -141,7 +144,7 @@ const CreatePost = () => {
                         setIsOpen={setIsOpenDiscardPost}
                         extendsClassName="z-[100]"
                         renderPopover={
-                            <div className="w-[400px] h-[202px] bg-white z-[100] rounded-xl font-medium text-center text-[14px]">
+                            <div className="w-[400px] max-w-[100vw] h-[202px] bg-white z-[100] rounded-xl font-medium text-center text-[14px]">
                                 <div className="px-8 pt-8 pb-4">
                                     <h2 className="text-[20px]">Discard post?</h2>
                                     <span className="text-secondary-text">
@@ -182,7 +185,6 @@ const CreatePost = () => {
                         <IconBack />
                     </button>
                 )}
-
                 <h3 className="">Create new post</h3>
                 {fileList && !isConvertCropped && !(listUrlCropped.length > 0) ? (
                     <Button onClick={handleCrop} isOnlyText extendsClassName="p-2">
@@ -200,9 +202,9 @@ const CreatePost = () => {
                     )
                 )}
             </div>
-            <div className="flex items-center justify-center relative">
+            <div className="flex items-center justify-center relative w-full">
                 {!fileList ? (
-                    <div className="w-[489px] h-[489px] p-6 flex items-center justify-center flex-col">
+                    <div className="md:w-[489px] w-full h-[489px] p-6 flex items-center justify-center flex-col">
                         <div>
                             <ImgCreatePost />
                         </div>
@@ -212,8 +214,12 @@ const CreatePost = () => {
                         </div>
                     </div>
                 ) : (
-                    <div className="h-[489px] relative flex items-center justify-center">
-                        <div className="w-[489px] flex items-center justify-center  bg-[#FAFAFA]">
+                    <div
+                        className={`${
+                            isShowDescription ? 'hidden md:flex' : 'flex'
+                        } h-[489px] relative w-full md:w-auto items-center justify-center`}
+                    >
+                        <div className="md:w-[489px] w-full flex items-center justify-center  bg-[#FAFAFA]">
                             <div
                                 className={`${aspect === 4 / 5 ? 'w-[391px]' : 'w-[489px]'} ${
                                     aspect === 4 / 3 ? 'h-[366px]' : 'h-[489px]'
@@ -241,7 +247,7 @@ const CreatePost = () => {
                         </div>
                         <div className="relative">
                             <form>
-                                <Comment descriptionPost={descriptionPost} onChange={handleChangeInput} />
+                                <WriteDescription descriptionPost={descriptionPost} onChange={handleChangeInput} />
                             </form>
                             <div className="flex items-center justify-between h-[44px]">
                                 <div>

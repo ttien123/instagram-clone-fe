@@ -13,7 +13,7 @@ const HeaderHomePage = () => {
     const [isOpenNotify, setIsOpenNotify] = useState(false);
     const [isOpenStyle, setIsOpenStyle] = useState(false);
     return (
-        <div className="fixed top-0 left-0 right-0 h-[60px] md:hidden">
+        <div className="fixed z-[80] top-0 left-0 right-0 h-[60px] md:hidden bg-white">
             <div className="px-4 flex items-center justify-between h-full">
                 <DropDown
                     isOpen={isOpenStyle}
@@ -45,14 +45,14 @@ const HeaderHomePage = () => {
                     </Button>
                 </DropDown>
                 <div className="flex items-center ">
-                    <div className="w-[250px] mr-3">
+                    <div className=" w-[250px] mr-3">
                         <InputSearch isMobile />
                     </div>
                     <DropDown
                         isOpen={isOpenNotify}
                         setIsOpen={setIsOpenNotify}
                         isNotify
-                        classNameRender="w-[100vw] !fixed !top-0 z-50 !left-0 h-[100vh] bg-white"
+                        classNameRender="w-[100vw] !fixed !top-0 z-50 !left-0 h-[calc(100vh-60px)] bg-white"
                         renderPopover={<ContentNotification isMobile setIsOpen={setIsOpenNotify} />}
                     >
                         <button>

@@ -73,17 +73,18 @@ const MoreActivity = () => {
 interface Props {
     isShowAll: boolean;
     setIsShowAll: React.Dispatch<React.SetStateAction<boolean>>;
+    isPageMess?: boolean;
 }
 
-const NavHome = ({ setIsShowAll, isShowAll }: Props) => {
+const NavHome = ({ setIsShowAll, isShowAll, isPageMess }: Props) => {
     const [isOpenCreatePost, setIsOpenCreatePost] = useState(false);
     const [isOpenMore, setIsOpenMore] = useState(false);
 
     return (
         <div
-            className={`${
-                isShowAll ? 'xl:w-[244px]' : 'w-[72px]'
-            } transition-all duration-500 md:pt-2 px-3 md:pb-5 md:h-[100vh] bg-white border-r-separator border-r fixed w-full md:w-[72px] bottom-0 md:left-0 z-10 flex flex-col`}
+            className={`${isShowAll ? 'xl:w-[244px]' : 'w-[72px]'} ${
+                isPageMess ? 'hidden md:block' : ''
+            } transition-all duration-500 md:pt-2 px-3 md:pb-5 md:h-[100vh] bg-white md:border-r-separator md:border-r fixed w-full md:w-[72px] bottom-0 md:left-0 z-[100] flex flex-col`}
         >
             <div className="h-[92px] hidden md:flex items-center justify-center">
                 <Link
@@ -151,6 +152,7 @@ const NavHome = ({ setIsShowAll, isShowAll }: Props) => {
                         isBtnClose
                         renderPopover={<CreatePost />}
                         classNameChildren="w-full"
+                        extendsClassName="z-[1000]"
                     >
                         <ItemLink
                             Icon={<IconCreate />}
