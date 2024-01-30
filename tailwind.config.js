@@ -28,6 +28,7 @@ export default {
                 'error-or-destructive': 'rgb(237, 73, 86)',
                 'tertiary-text': 'rgb(199, 199, 199)',
                 'bg-textMess': 'rgb(55, 151, 240)',
+                'error-or-destructive': 'rgb(237, 73, 86)',
             },
             boxShadow: {
                 popoverShadow: '4px 0 24px rgba(0, 0, 0,.15)',

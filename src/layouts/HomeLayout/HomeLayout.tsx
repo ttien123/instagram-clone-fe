@@ -12,7 +12,7 @@ const HomeLayout = ({ children }: Props) => {
     const [isShowAll, setIsShowAll] = useState(Boolean(!(match || matchId)));
 
     return (
-        <div className="flex">
+        <div className="flex mb-[60px] md:mb-0">
             {<NavHome isPageMess={Boolean(match || matchId)} isShowAll={isShowAll} setIsShowAll={setIsShowAll} />}
             <div
                 className={`w-full md:ml-[72px] ${Boolean(!(match || matchId)) ? 'xl:ml-[244px] ' : ''}`}

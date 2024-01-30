@@ -4,8 +4,19 @@ import { initImageOrVideoUrl } from 'src/layouts/HomeLayout/components/CreatePos
 
 interface Props extends initImageOrVideoUrl {
     aspectInit: number;
-    setImageOrVideoUrl: React.Dispatch<React.SetStateAction<initImageOrVideoUrl[]>>;
+    setImageOrVideoUrl?: React.Dispatch<React.SetStateAction<initImageOrVideoUrl[]>>;
+    setImageAvatarUrl?: React.Dispatch<
+        React.SetStateAction<{
+            width: number;
+            height: number;
+            x: number;
+            y: number;
+        }>
+    >;
     isShowDescription?: boolean;
+    isShowGrid?: boolean;
+    isShowOverFlow?: boolean;
+    cropShape?: 'rect' | 'round';
 }
 
 export interface CroppedArea {
@@ -17,13 +28,22 @@ export interface CroppedArea {
 
 const ImageOrVideoCrop = ({
     aspectInit,
-    cropInit,
+    cropInit = { x: 0, y: 0 },
     type,
     url,
-    zoomInit,
-    croppedAreaInit,
+    zoomInit = 1,
+    croppedAreaInit = {
+        width: 0,
+        height: 0,
+        x: 0,
+        y: 0,
+    },
+    setImageAvatarUrl,
     setImageOrVideoUrl,
     isShowDescription,
+    cropShape = 'rect',
+    isShowGrid = !isShowDescription,
+    isShowOverFlow = false,
 }: Props) => {
     const [croppedArea, setCroppedArea] = useState(croppedAreaInit);
     const [crop, setCrop] = useState(cropInit);
@@ -36,7 +56,6 @@ const ImageOrVideoCrop = ({
         setZoom(zoom);
     };
     const handleCrop = (location: Point) => {
-        // if (aspectInit !== 16 / 9 && !isShowDescription) {
         if (!isShowDescription && type.includes('image')) {
             setCrop(location);
         }
@@ -46,43 +65,39 @@ const ImageOrVideoCrop = ({
         if (aspectInit === 16 / 9 && !type.includes('image')) {
             setCrop({ x: 0, y: 0 });
         }
-        setImageOrVideoUrl((prev) => {
-            const lastArray = prev;
-            const newArray = lastArray.map((item) => {
-                if (item.url === url && !item.type.includes('image')) {
-                    return { ...item, cropInit: location };
-                }
-                return item;
-            });
+        setImageOrVideoUrl &&
+            setImageOrVideoUrl((prev) => {
+                const lastArray = prev;
+                const newArray = lastArray.map((item) => {
+                    if (item.url === url && !item.type.includes('image')) {
+                        return { ...item, cropInit: location };
+                    }
+                    return item;
+                });
 
-            return newArray;
-        });
+                return newArray;
+            });
     };
 
     useEffect(() => {
         setZoom(zoomInit);
     }, [zoomInit]);
 
-    // useEffect(() => {
-    //     const container: any = document.querySelector('.reactEasyCrop_Container');
-    //     container && console.log(container.clientWidth);
-    //     if (container && aspectInit !== 16 / 9) {
-    //         container.style.height = container.clientWidth + 'px';
-    //     }
-    // }, [aspectInit]);
-
     useEffect(() => {
-        setImageOrVideoUrl((prev) => {
-            const lastArray = prev;
-            const newArray = lastArray.map((item) => {
-                if (item.url === url) {
-                    return { ...item, croppedAreaInit: croppedArea };
-                }
-                return item;
+        setImageOrVideoUrl &&
+            setImageOrVideoUrl((prev) => {
+                const lastArray = prev;
+                const newArray = lastArray.map((item) => {
+                    if (item.url === url) {
+                        return { ...item, croppedAreaInit: croppedArea };
+                    }
+                    return item;
+                });
+
+                return newArray;
             });
 
-            return newArray;
-        });
+        setImageAvatarUrl && setImageAvatarUrl(croppedArea);
     }, [croppedArea]);
 
     return (
@@ -91,10 +106,14 @@ const ImageOrVideoCrop = ({
                 <Cropper
                     zoomWithScroll={false}
                     objectFit="cover"
-                    style={{ mediaStyle: { maxWidth: `${aspectInit !== 16 / 9 ? 'none' : '100%'}` } }}
-                    showGrid={!isShowDescription}
+                    style={{
+                        mediaStyle: { maxWidth: `${aspectInit !== 16 / 9 ? 'none' : '100%'}` },
+                        containerStyle: { overflow: `${isShowOverFlow ? 'visible' : 'hidden'}` },
+                    }}
+                    showGrid={isShowGrid}
                     image={url}
                     crop={crop}
+                    cropShape={cropShape}
                     zoom={zoom}
                     minZoom={1}
                     maxZoom={2}
