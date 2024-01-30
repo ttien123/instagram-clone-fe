@@ -210,7 +210,7 @@ const CreatePost = () => {
                         </div>
                         <h5 className="text-[20px] text-black font-normal mt-4 mb-6">Drag photos and videos here</h5>
                         <div>
-                            <InputFile onChange={handleChangeFile} />
+                            <InputFile onChange={handleChangeFile} isMultiple />
                         </div>
                     </div>
                 ) : (

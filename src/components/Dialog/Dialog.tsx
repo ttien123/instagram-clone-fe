@@ -15,8 +15,8 @@ import IconClosePost from 'src/assets/IconClosePost';
 interface Props {
     renderPopover: React.ReactNode;
     extendsClassName?: string;
-    isOpen: boolean;
-    setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
+    isOpen?: boolean;
+    setIsOpen?: React.Dispatch<React.SetStateAction<boolean>>;
     isBtnClose?: boolean;
     classNameChildren?: string;
 }
@@ -65,7 +65,10 @@ const Dialog: FC<PropsWithChildren<Props>> = ({
                                 {renderPopover}
                             </div>
                             {isBtnClose && (
-                                <button className="absolute top-4 right-4 z-50" onClick={() => setIsOpen(false)}>
+                                <button
+                                    className="absolute top-4 right-4 z-50"
+                                    onClick={() => setIsOpen && setIsOpen(false)}
+                                >
                                     <IconClosePost />
                                 </button>
                             )}
