@@ -3,6 +3,7 @@ import member from 'src/assets/AuthImg/member.jpg';
 import Button from '../Button';
 import { useNavigate } from 'react-router-dom';
 import Avatar from '../Avatar';
+import useSwitchMode from 'src/reducer/useSwtichMode';
 
 interface Props {
     isSearchRecent?: boolean;
@@ -26,11 +27,15 @@ const LinkToMember = ({
     to,
 }: Props) => {
     const negative = useNavigate();
+    const darkMode = useSwitchMode((state) => state.darkMode);
+
     return (
         <div
             onClick={() => to && negative(to)}
-            className={`py-2 w-full ${isSwitch ? 'px-4' : 'hover:bg-secondary-background px-6'} cursor-pointer ${
-                isActive && 'bg-highlight-background'
+            className={`py-2 w-full cursor-pointer px-6 bg-white transition-all duration-500 hover:bg-secondary-background ${
+                darkMode ? '!bg-black hover:bg-secondary-background-dark' : ''
+            } ${isSwitch ? '!px-4' : ''} ${isActive && 'bg-highlight-background hover:bg-highlight-background'} ${
+                isActive && darkMode && 'bg-highlight-background-dark hover:!bg-highlight-background-dark'
             }`}
         >
             <div
@@ -47,8 +52,14 @@ const LinkToMember = ({
                         <Avatar src={member} />
                     </div>
                     <div className={`${isMess ? 'md:hidden xl:block' : ''}`}>
-                        <h4 className="font-semibold text-left">t.tien_01</h4>
-                        <p className="text-secondary-text">Nguyễn Thế Tiến</p>
+                        <h4
+                            className={`font-semibold text-left transition-all duration-500 ${
+                                darkMode ? 'text-white' : ''
+                            }`}
+                        >
+                            t.tien_01
+                        </h4>
+                        <p className="text-secondary-text ">Nguyễn Thế Tiến</p>
                     </div>
                 </div>
                 {isSearchRecent && (
@@ -62,7 +73,11 @@ const LinkToMember = ({
                         Follow
                     </Button>
                 )}
-                {isFollowing && <Button isBtnType2={isFollowing}>Following</Button>}
+                {isFollowing && (
+                    <Button isBtnType2={isFollowing} extendsClassName="dark:bg-secondary-button-background">
+                        Following
+                    </Button>
+                )}
                 {isSwitch && (
                     <Button isOnlyText extendsClassName="!text-[12px] font-semibold">
                         Switch

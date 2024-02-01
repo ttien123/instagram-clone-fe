@@ -5,12 +5,15 @@ import useDebounce from 'src/hooks/useDebounce';
 import Popover from '../Popover';
 import SearchRecent from '../SearchRecent';
 import MemberSearch from '../MemberSearch';
+import useSwitchMode from 'src/reducer/useSwtichMode';
 
 interface Props {
     isMobile?: boolean;
 }
 
 const InputSearch = ({ isMobile }: Props) => {
+    const darkMode = useSwitchMode((state) => state.darkMode);
+
     const inputRef = useRef<HTMLInputElement>(null);
     const [open, setOpen] = useState(false);
     const [isFocusInput, setIsFocusInput] = useState(false);
@@ -30,11 +33,16 @@ const InputSearch = ({ isMobile }: Props) => {
 
     useEffect(() => {}, [debouncedValue]);
     return (
-        <div className={`${isMobile ? 'mx-0' : 'mx-4 mb-6'} rounded-lg bg-highlight-background relative`}>
+        <div
+            className={`${isMobile ? 'mx-0' : 'mx-4 mb-6'} rounded-lg ${
+                darkMode ? 'bg-highlight-background-dark' : 'bg-highlight-background'
+            } relative`}
+        >
             <Popover
                 open={open}
                 isToggle={false}
                 setOpen={setOpen}
+                classNamePosition={`${isMobile && 'z-[100] !fixed !top-[60px]'}`}
                 renderPopover={
                     valueSearch && isFocusInput ? (
                         <MemberSearch isMobile={isMobile} />
@@ -50,7 +58,9 @@ const InputSearch = ({ isMobile }: Props) => {
                     value={valueSearch}
                     ref={inputRef}
                     type="text"
-                    className="block w-full py-[3px] px-4 bg-highlight-background h-[40px] rounded-lg border-none outline-none"
+                    className={`block w-full py-[3px] px-4 ${
+                        darkMode ? 'bg-highlight-background-dark text-white' : 'bg-highlight-background'
+                    } h-[40px] rounded-lg border-none outline-none`}
                 />
             </Popover>
             <div className="cursor-text absolute top-[50%] translate-y-[-50%] left-4 flex items-center justify-start pointer-events-none">
@@ -67,9 +77,9 @@ const InputSearch = ({ isMobile }: Props) => {
                     className="absolute top-[50%] translate-y-[-50%] right-3 w-[20px] h-[20px] bg-[url(src/assets/AuthImg/TJztmXpWTmS.png)] bg-no-repeat bg-[-318px_-333px]"
                 ></button>
             )}
-            <div className="absolute top-[30%] translate-y-[-50%] right-4 w-[18px] h-[18px] animate-loading-icon">
+            {/* <div className="absolute top-[30%] translate-y-[-50%] right-4 w-[18px] h-[18px] animate-loading-icon">
                 <IconLoading />
-            </div>
+            </div> */}
         </div>
     );
 };

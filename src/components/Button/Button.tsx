@@ -1,6 +1,7 @@
 import { Omit } from 'lodash';
 import React, { ButtonHTMLAttributes } from 'react';
 import { Link } from 'react-router-dom';
+import useSwitchMode from 'src/reducer/useSwtichMode';
 
 interface Prop extends ButtonHTMLAttributes<HTMLButtonElement> {
     children: React.ReactNode;
@@ -27,6 +28,7 @@ const Button = ({
     className,
     ...rest
 }: Prop) => {
+    const darkMode = useSwitchMode((state) => state.darkMode);
     let Comp: any = 'button';
     let newClassName = className;
     const props: Omit<Prop, 'children'> = {
@@ -44,7 +46,8 @@ const Button = ({
 
     if (isBtnType2) {
         newClassName =
-            'h-[32px] flex items-center justify-center px-4 text-black font-semibold bg-highlight-background hover:bg-secondary-button-hover rounded-[8px]';
+            'h-[32px] flex items-center justify-center px-4 text-black font-semibold bg-highlight-background hover:bg-secondary-button-hover rounded-[8px] ' +
+            (darkMode && ' text-white bg-secondary-button-background hover:bg-secondary-button-background');
     }
 
     if (extendsClassName) {
