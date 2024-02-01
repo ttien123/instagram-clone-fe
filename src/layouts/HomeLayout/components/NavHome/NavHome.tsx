@@ -23,49 +23,115 @@ import IconActivity from 'src/assets/IconActivity';
 import IconSaved from 'src/assets/IconSaved';
 import IconSwitchLight from 'src/assets/IconSwitchLight';
 import IconReport from 'src/assets/IconReport';
+import * as Switch from '@radix-ui/react-switch';
+import ArrowDown from 'src/assets/ArrowDown';
+import useSwitchMode from 'src/reducer/useSwtichMode';
+import IconMoon from 'src/assets/IconMoon';
 
 const MoreActivity = () => {
+    const [isChangeAppearance, setIsChangeAppearance] = useState(false);
+    const darkMode = useSwitchMode((state) => state.darkMode);
+    const setDarkMode = useSwitchMode((state) => state.setDarkMode);
     return (
-        <div className="w-[266px] bg-white overflow-hidden rounded-2xl shadow-always-black">
-            <div className="p-2">
-                <div>
-                    <ItemLink Icon={<IconSetting />} IconActive={<IconSetting />} name="Setting" isMoreActivity />
-                </div>
-                <div>
-                    <ItemLink
-                        Icon={<IconActivity />}
-                        IconActive={<IconActivity />}
-                        name="Your activity"
-                        isMoreActivity
-                    />
-                </div>
-                <div>
-                    <ItemLink Icon={<IconSaved />} IconActive={<IconSaved />} name="Saved" isMoreActivity />
-                </div>
-                <div>
-                    <ItemLink
-                        Icon={<IconSwitchLight />}
-                        IconActive={<IconSwitchLight />}
-                        name="Switch appearance"
-                        isMoreActivity
-                    />
-                </div>
-            </div>
-            <div>
-                <ItemLink Icon={<IconReport />} IconActive={<IconSetting />} name="Report a problem" isMoreActivity />
-            </div>
-            <div className="h-[6px] bg-stroke opacity-30"></div>
-            <div className="p-2">
-                <div>
-                    <ItemLink name="Switch accounts" isMoreActivity />
-                </div>
-            </div>
-            <div className="h-[0.5px] bg-stroke opacity-30"></div>
-            <div className="p-2">
-                <div>
-                    <ItemLink name="Log out" isMoreActivity />
-                </div>
-            </div>
+        <div className="w-[266px] bg-white dark:bg-highlight-background-dark overflow-hidden rounded-2xl shadow-always-black">
+            {!isChangeAppearance && (
+                <>
+                    <div className="p-2">
+                        <div>
+                            <ItemLink
+                                Icon={<IconSetting />}
+                                IconActive={<IconSetting />}
+                                name="Setting"
+                                isMoreActivity
+                            />
+                        </div>
+                        <div>
+                            <ItemLink
+                                Icon={<IconActivity />}
+                                IconActive={<IconActivity />}
+                                name="Your activity"
+                                isMoreActivity
+                            />
+                        </div>
+                        <div>
+                            <ItemLink Icon={<IconSaved />} IconActive={<IconSaved />} name="Saved" isMoreActivity />
+                        </div>
+                        <div onClick={() => setIsChangeAppearance(true)}>
+                            <ItemLink
+                                Icon={darkMode ? <IconMoon /> : <IconSwitchLight />}
+                                IconActive={darkMode ? <IconMoon /> : <IconSwitchLight />}
+                                name="Switch appearance"
+                                isMoreActivity
+                            />
+                        </div>
+                    </div>
+                    <div>
+                        <ItemLink
+                            Icon={<IconReport />}
+                            IconActive={<IconSetting />}
+                            name="Report a problem"
+                            isMoreActivity
+                        />
+                    </div>
+                    <div className="h-[6px] bg-stroke opacity-30"></div>
+                    <div className="p-2">
+                        <div>
+                            <ItemLink name="Switch accounts" isMoreActivity />
+                        </div>
+                    </div>
+                    <div className="h-[0.5px] bg-stroke opacity-30"></div>
+                    <div className="p-2">
+                        <div>
+                            <ItemLink name="Log out" isMoreActivity />
+                        </div>
+                    </div>
+                </>
+            )}
+            {isChangeAppearance && (
+                <>
+                    <div className="p-2">
+                        <div className="flex items-center justify-between p-4 xl:hover:bg-hover-overlay rounded-lg">
+                            <button
+                                onClick={() => setIsChangeAppearance(false)}
+                                className="rotate-90 px-2 dark:text-white"
+                            >
+                                <ArrowDown />
+                            </button>
+                            <div className="font-medium dark:text-white">Switch appearance</div>
+                            <div className="dark:hidden flex items-center justify-center">
+                                <IconSwitchLight />
+                            </div>
+                            <div className="hidden dark:flex dark:text-white items-center justify-center">
+                                <IconMoon />
+                            </div>
+                        </div>
+                    </div>
+                    <div className="p-2 border-t border-t-separator">
+                        <div className="flex items-center justify-between p-4 xl:hover:bg-hover-overlay rounded-lg">
+                            <div className="dark:text-white">Dark mode</div>
+                            <div className="flex items-center justify-center">
+                                <Switch.Root
+                                    checked={darkMode}
+                                    onCheckedChange={(e) => {
+                                        let newMode = 'light';
+                                        if (e) {
+                                            newMode = 'dark';
+                                        } else {
+                                            newMode = 'light';
+                                        }
+                                        localStorage.setItem('displayMode', newMode);
+                                        setDarkMode(e);
+                                    }}
+                                    className="w-[32px] h-[16px] bg-[#DBDFE4] rounded-full relative  data-[state=checked]:bg-black data-[state=checked]:dark:bg-white outline-none cursor-pointer"
+                                    id="airplane-mode"
+                                >
+                                    <Switch.Thumb className="block w-[12px] h-[12px] bg-white dark:bg-black rounded-full transition-transform duration-100 translate-x-0.5 will-change-transform data-[state=checked]:translate-x-[19px]" />
+                                </Switch.Root>
+                            </div>
+                        </div>
+                    </div>
+                </>
+            )}
         </div>
     );
 };
@@ -79,12 +145,11 @@ interface Props {
 const NavHome = ({ setIsShowAll, isShowAll, isPageMess }: Props) => {
     const [isOpenCreatePost, setIsOpenCreatePost] = useState(false);
     const [isOpenMore, setIsOpenMore] = useState(false);
-
     return (
         <div
             className={`${isShowAll ? 'xl:w-[244px]' : 'w-[72px]'} ${
-                isPageMess ? 'hidden md:block' : ''
-            } transition-all duration-500 md:pt-2 px-3 md:pb-5 md:h-[100vh] bg-white md:border-r-separator md:border-r fixed w-full md:w-[72px] bottom-0 md:left-0 z-[100] flex flex-col`}
+                isPageMess ? 'hidden md:flex' : ''
+            } transition-all duration-500 md:pt-2 px-3 md:pb-5 md:h-[100vh] dark:bg-black bg-white md:border-r-separator md:border-r fixed w-full md:w-[72px] bottom-0 md:left-0 z-[100] flex flex-col`}
         >
             <div className="h-[92px] hidden md:flex items-center justify-center">
                 <Link
@@ -95,14 +160,14 @@ const NavHome = ({ setIsShowAll, isShowAll, isPageMess }: Props) => {
                     <div
                         className={`opacity-0 ${
                             isShowAll ? 'xl:opacity-100' : 'opacity-0'
-                        } transition-all duration-500 absolute top-1 `}
+                        } transition-all duration-500 absolute top-1 dark:text-white`}
                     >
                         <Logo />
                     </div>
                     <div
                         className={`opacity-100 scale-100 xl:opacity-0 xl:scale-0' ${
                             !isShowAll ? 'xl:opacity-100 xl:scale-100' : 'xl:opacity-0 xl:scale-0'
-                        } transition-all duration-500 absolute top-1 `}
+                        } transition-all duration-500 absolute top-1 dark:text-white`}
                     >
                         <IconInstagram />
                     </div>

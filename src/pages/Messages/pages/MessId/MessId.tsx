@@ -40,15 +40,15 @@ const MessId = () => {
         <div className="h-full flex flex-col">
             <div className="flex h-[64px] md:h-[75px] items-center w-full justify-between px-4 border-b border-b-separator">
                 <div className="flex items-center justify-start">
-                    <Button to={path.messages} className="mr-3 md:hidden">
+                    <Button to={path.messages} className="mr-3 md:hidden dark:text-white">
                         <IconBack />
                     </Button>
                     <div className="md:w-[44px] md:h-[44px] w-[24px] h-[24px]">
                         <Avatar src={avatar} />
                     </div>
-                    <div className=" font-semibold ml-2">lilaschan01</div>
+                    <div className=" font-semibold ml-2 dark:text-white">lilaschan01</div>
                 </div>
-                <div className="flex items-center justify-center">
+                <div className="flex items-center justify-center dark:text-white">
                     <div className="p-2">
                         <IconCall />
                     </div>
@@ -65,7 +65,7 @@ const MessId = () => {
                 <div className="w-[56px] h-[56px] md:w-[96px] md:h-[96px] my-4 mx-auto">
                     <Avatar src={avatar} />
                 </div>
-                <div className="mb-1 text-[20px] font-medium">Dương.</div>
+                <div className="mb-1 text-[20px] font-medium dark:text-white">Dương.</div>
                 <div className="text-[12px] text-secondary-text">08.duongw.05 · Instagram</div>
                 <div className="text-center mt-4 mb-8">
                     <Button isBtnType2 extendsClassName="mx-auto">
@@ -80,7 +80,7 @@ const MessId = () => {
                                 <Avatar src={avatar} />
                             </div>
                         </div>
-                        <div className="py-[7px] bg-highlight-background text-black rounded-[18px] px-3 max-w-[80%] text-left">
+                        <div className="py-[7px] bg-highlight-background dark:bg-highlight-background-dark dark:text-white text-black rounded-[18px] px-3 max-w-[80%] text-left">
                             ak naks jnk nsakj nksaj nksjn kans kjnsak jnska nksjn ksajn kjsnk jsank janskj naksjn kjsan
                             kjsan kjnsak jsnak jnsakj nksajn kjsank djksa jnsakj dnsakjn sakj nksaj nksjan kajn ksjan
                             kjsank djsan dkajn dkjsan dkjsan kdjsan kjsank jan kjsan kdjsank jsan kjasndk jsan kjsan
@@ -102,23 +102,23 @@ const MessId = () => {
                 </div>
             </div>
             <div className="min-h-[44px] flex items-center justify-between pl-[11px] pr-4 m-4 border border-separate rounded-[22px]">
-                <div className="">
-                    <EmojiIcons isBottom isIconBlack width={24} height={24} setChosenEmoji={setChosenEmoji} />
+                <div className="dark:text-white">
+                    <EmojiIcons isIconBlack width={24} height={24} setChosenEmoji={setChosenEmoji} />
                 </div>
                 <WriteDescription
                     ref={ref}
                     placeholder="Message..."
                     classNameWrapper="flex-1 flex items-center justify-center px-2"
-                    classNameInput={`max-h-[124px] overflow-y-auto`}
+                    classNameInput={`max-h-[124px] overflow-y-auto dark:text-white dark:bg-black`}
                     descriptionPost={message}
                     onChange={handleChangeComment}
                 />
                 {message ? (
-                    <Button isOnlyText extendsClassName="font-semibold">
+                    <Button isOnlyText extendsClassName="font-semibold dark:text-white">
                         Send
                     </Button>
                 ) : (
-                    <div className="flex items-center justify-center">
+                    <div className="flex items-center justify-center dark:text-white">
                         <div className="p-2">
                             <IconRecord />
                         </div>

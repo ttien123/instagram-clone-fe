@@ -13,20 +13,20 @@ const HeaderHomePage = () => {
     const [isOpenNotify, setIsOpenNotify] = useState(false);
     const [isOpenStyle, setIsOpenStyle] = useState(false);
     return (
-        <div className="fixed z-[80] top-0 left-0 right-0 h-[60px] md:hidden bg-white">
+        <div className="fixed z-[80] top-0 left-0 right-0 h-[60px] md:hidden bg-white dark:bg-black">
             <div className="px-4 flex items-center justify-between h-full">
                 <DropDown
                     isOpen={isOpenStyle}
                     setIsOpen={setIsOpenStyle}
                     renderPopover={
                         <div className="ml-4 rounded-md shadow-always-black">
-                            <div className="text-[16px] py-2 px-4 bg-white flex items-center justify-between rounded-md">
+                            <div className="text-[16px] py-2 px-4 bg-white dark:bg-highlight-background-dark text-white flex items-center justify-between rounded-md">
                                 Following
                                 <span className="ml-2">
                                     <IconFollowing />
                                 </span>
                             </div>
-                            <div className="text-[16px] py-2 px-4 bg-white flex items-center justify-between rounded-md">
+                            <div className="text-[16px] py-2 px-4 bg-white dark:bg-highlight-background-dark text-white flex items-center justify-between rounded-md">
                                 Favorites
                                 <span className="ml-2">
                                     <IconStar />
@@ -35,7 +35,7 @@ const HeaderHomePage = () => {
                         </div>
                     }
                 >
-                    <Button className="flex items-center">
+                    <Button className="flex items-center dark:text-white">
                         <span>
                             <IconInstagram />
                         </span>
@@ -55,7 +55,7 @@ const HeaderHomePage = () => {
                         classNameRender="w-[100vw] !fixed !top-0 z-50 !left-0 h-[calc(100vh-60px)] bg-white"
                         renderPopover={<ContentNotification isMobile setIsOpen={setIsOpenNotify} />}
                     >
-                        <button>
+                        <button className="dark:text-white">
                             <IconNotifications />
                         </button>
                     </DropDown>

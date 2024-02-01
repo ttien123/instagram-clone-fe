@@ -37,22 +37,22 @@ const Post = () => {
                     <div className="w-[32px] h-[32px] mr-3 rounded-[50%] flex items-center justify-center overflow-hidden">
                         <img src={avatar} alt="avatar" className="w-full h-full block" />
                     </div>
-                    <div className="font-semibold">lilaschan01</div>
-                    <span className="mx-1 text-[20px] text-secondary-text">•</span>
-                    <div className="text-secondary-text">14h</div>
+                    <div className="font-semibold dark:text-white">lilaschan01</div>
+                    <span className="mx-1 text-[20px] text-secondary-text dark:text-white">•</span>
+                    <div className="text-secondary-text dark:text-white">14h</div>
                 </div>
-                <div>
+                <div className="dark:text-white">
                     <IconDot />
                 </div>
             </div>
             <div>
                 <SwiperPosted aspect={1} />
             </div>
-            <div className="mt-1">
+            <div className="mt-1 dark:text-white">
                 <Social />
             </div>
-            <div className="mt-1 font-semibold">804,267 likes</div>
-            <p className="line-clamp-2">
+            <div className="mt-1 font-semibold dark:text-white">804,267 likes</div>
+            <p className="line-clamp-2 dark:text-white">
                 What console did you start with? 🤔👇 @brgaming (h/t gamewithdave/x) What console did you start with?
                 🤔👇 @brgaming (h/t gamewithdave/x) What console did you start with? 🤔👇 @brgaming (h/t gamewithdave/x)
                 What console did you start with? 🤔👇 @brgaming (h/t gamewithdave/x)
@@ -62,11 +62,11 @@ const Post = () => {
                     ref={ref}
                     placeholder="Add a comment"
                     classNameWrapper="flex-1"
-                    classNameInput={`!max-h-[80px] text-[14px] overflow-y-auto placeholder:text-[14px]`}
+                    classNameInput={`!max-h-[80px] text-[14px] overflow-y-auto placeholder:text-[14px] transition-all duration-500 dark:text-white dark:bg-black`}
                     descriptionPost={comment}
                     onChange={handleChangeComment}
                 />
-                <div className="flex items-center justify-center">
+                <div className="flex items-center justify-center ">
                     {comment && (
                         <Button isOnlyText extendsClassName="font-semibold mr-2">
                             Post

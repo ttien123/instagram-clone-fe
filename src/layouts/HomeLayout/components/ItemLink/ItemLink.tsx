@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import classNames from 'classnames';
 import { useMatch } from 'react-router-dom';
 import Button from 'src/components/Button';
@@ -16,19 +16,26 @@ interface Props {
 
 const ItemLink = ({ Icon, IconActive, name, to, isShowAll, setIsShowAll, src, isMoreActivity }: Props) => {
     const match = useMatch(`${to}`);
+    const matchMessId = useMatch(`/messages/:id`);
+    const matchMess = useMatch(`/messages`);
     const handleClick = () => {
+        console.log(matchMess);
+
         if (name === 'Create') {
             return;
+        }
+        if (name === 'More' && (matchMessId || matchMess)) {
+            return;
+        }
+        if (name !== 'Messages') {
+            setIsShowAll && setIsShowAll(true);
         } else {
-            if (name !== 'Messages') {
-                setIsShowAll && setIsShowAll(true);
-            } else {
-                setIsShowAll && setIsShowAll(false);
-            }
+            setIsShowAll && setIsShowAll(false);
         }
     };
+
     return (
-        <Button to={to} className="w-full cursor-pointer " onClick={handleClick}>
+        <Button to={to} className="w-full cursor-pointer dark:text-white" onClick={handleClick}>
             <div
                 className={`flex items-center justify-center xl:justify-start py-3 px-[10px] my-1 w-full ${
                     isMoreActivity ? 'hover:bg-hover-overlay' : 'xl:hover:bg-hover-overlay'
